@@ -15,8 +15,6 @@
 #include "lib\foreach"
 #include "lib\mxINI"
 
-#include "config"
-
 #include "admin\tools\ban"
 #include "admin\tools\jail"
 #include "admin\tools\kick"
@@ -29,22 +27,23 @@
 #include "gang\menu"
 #include "gang"
 
+#include "player"
+#include "player\commands"
+#include "player\menu"
 #include "player\tools\fightstyle"
 #include "player\tools\level"
+#include "player\tools\money"
 #include "player\tools\payday"
 #include "player\tools\vehicle"
 #include "player\tools\vip"
 #include "player\tools\weapon"
-#include "player\commands"
-#include "player\menu"
-#include "player"
 
 #include "protect\armour"
 #include "protect\chat"
 #include "protect\health"
 #include "protect\idle"
 #include "protect\jetpack"
-#include "protect\money"
+#include "protect\money.inc"
 #include "protect\ping"
 #include "protect\rconlogin"
 #include "protect\speed"
@@ -85,6 +84,8 @@
 #include "world\zones"
 #include "world"
 
+#include "config"
+
 main() {}
 
 public OnGameModeInit()
@@ -97,6 +98,7 @@ public OnGameModeInit()
 	lang_OnGameModeInit();
 	log_OnGameModeInit();
 	weather_OnGameModeInit();
+	player_OnGameModeInit();
 	
 	// save world
 	config_Save();

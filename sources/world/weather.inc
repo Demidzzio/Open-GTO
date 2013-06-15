@@ -13,7 +13,7 @@
 #pragma library weather
 
 
-new gWeatherUpdateTime = WEATHER_UPDATE_TIME;
+static gWeatherUpdateTime = WEATHER_UPDATE_TIME;
 
 stock weather_OnGameModeInit()
 {

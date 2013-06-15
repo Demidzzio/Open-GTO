@@ -28,6 +28,8 @@ stock config_OnGameModeInit()
 		log_LoadConfig(file_cfg);
 		lang_LoadConfig(file_cfg);
 		weather_LoadConfig(file_cfg);
+		player_LoadConfig(file_cfg);
+		money_LoadConfig(file_cfg);
 		
 		ini_closeFile(file_cfg);
 	}
@@ -46,6 +48,8 @@ stock config_Save()
 	log_SaveConfig(file_cfg);
 	lang_SaveConfig(file_cfg);
 	weather_SaveConfig(file_cfg);
+	player_SaveConfig(file_cfg);
+	money_SaveConfig(file_cfg);
 	
 	ini_closeFile(file_cfg);
 	

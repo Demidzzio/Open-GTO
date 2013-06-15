@@ -46,6 +46,17 @@
 #define SKINS_IGNORE		0, 74
 
 /*
+	Player
+*/
+#define PLAYER_MAX_MONEY		999999999
+#define PLAYER_START_MONEY		1000
+
+/*
+	Protect
+*/
+#define PROTECT_MONEY_ENABLED	1
+
+/*
 	Mapicon streamer
 */
 #define MAX_ICONS					1000
