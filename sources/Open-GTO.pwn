@@ -9,16 +9,57 @@
 
 #include "config.h"
 
-#include "lib\utils"
-#include "lib\lang"
-#include "lib\log"
-#include "lib\foreach"
-#include "lib\mxINI"
+#include "kernel\config.inc"
+#include "kernel\lib\utils"
+#include "kernel\lang"
+#include "kernel\log"
+#include "kernel\lib\foreach"
+#include "kernel\lib\mxINI"
 
-#include "admin\tools\ban"
-#include "admin\tools\jail"
-#include "admin\tools\kick"
-#include "admin\tools\mute"
+#include "kernel\streamers\checkpoint"
+#include "kernel\streamers\mapicon"
+
+#include "kernel\vehicle\fuel"
+#include "kernel\vehicle\lock"
+#include "kernel\vehicle\speed"
+#include "kernel\vehicle"
+
+#include "kernel\weapon\drop"
+#include "kernel\weapon\skill"
+#include "kernel\weapon"
+
+#include "kernel\world\enterexits"
+#include "kernel\world\weather"
+#include "kernel\world\zones"
+
+#include "kernel\admin\ban"
+#include "kernel\admin\jail"
+#include "kernel\admin\kick"
+#include "kernel\admin\mute"
+
+#include "kernel\player.inc"
+#include "kernel\player\fightstyle"
+#include "kernel\player\level"
+#include "kernel\player\money"
+#include "kernel\player\payday"
+#include "kernel\player\vehicle"
+#include "kernel\player\vip"
+#include "kernel\player\weapon"
+
+#include "kernel\protect\armour"
+#include "kernel\protect\chat"
+#include "kernel\protect\health"
+#include "kernel\protect\idle"
+#include "kernel\protect\jetpack"
+#include "kernel\protect\money.inc"
+#include "kernel\protect\ping"
+#include "kernel\protect\rconlogin"
+#include "kernel\protect\speed"
+#include "kernel\protect\weapon"
+
+#include "kernel\quest"
+
+
 #include "admin\commands"
 #include "admin\menu"
 #include "admin"
@@ -30,30 +71,11 @@
 #include "player"
 #include "player\commands"
 #include "player\menu"
-#include "player\tools\fightstyle"
-#include "player\tools\level"
-#include "player\tools\money"
-#include "player\tools\payday"
-#include "player\tools\vehicle"
-#include "player\tools\vip"
-#include "player\tools\weapon"
-
-#include "protect\armour"
-#include "protect\chat"
-#include "protect\health"
-#include "protect\idle"
-#include "protect\jetpack"
-#include "protect\money.inc"
-#include "protect\ping"
-#include "protect\rconlogin"
-#include "protect\speed"
-#include "protect\weapon"
 
 #include "quest\deathmatch"
 #include "quest\race"
 #include "quest\swagup"
 #include "quest\trucker"
-#include "quest"
 
 #include "services\bank"
 #include "services\bar"
@@ -66,31 +88,20 @@
 #include "services\vehshop"
 #include "services\weaponshop"
 
-#include "streamers\checkpoint"
-#include "streamers\mapicon"
-
-#include "vehicle\fuel"
-#include "vehicle\lock"
-#include "vehicle\speed"
-#include "vehicle"
-
-#include "weapon\drop"
-#include "weapon\skill"
-#include "weapon"
-
-#include "world\enterexits"
 #include "world\groundhold"
-#include "world\weather"
-#include "world\zones"
 #include "world"
 
 #include "config"
+
 
 main() {}
 
 public OnGameModeInit()
 {
 	log_Game("Open-GTO: init...");
+	// kernel
+	kernel_OnGameModeInit();
+	
 	// load configure
 	config_OnGameModeInit();
 	

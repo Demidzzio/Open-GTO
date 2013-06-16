@@ -13,12 +13,6 @@
 #pragma library player
 
 
-enum info_Player {
-	Money,
-	BankMoney,
-}
-new gPlayer[MAX_PLAYERS][info_Player];
-
 static gPlayerStartMoney = PLAYER_START_MONEY;
 
 stock player_OnGameModeInit()
