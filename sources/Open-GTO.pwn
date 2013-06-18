@@ -41,6 +41,7 @@
 #include "kernel\player\armour"
 #include "kernel\player\fightstyle"
 #include "kernel\player\health"
+#include "kernel\player\ip"
 #include "kernel\player\level"
 #include "kernel\player\money"
 #include "kernel\player\payday"
