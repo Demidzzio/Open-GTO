@@ -1,6 +1,6 @@
 /*
 
-	About: health functions
+	About: health anti cheat
 	Author: ziggi
 
 */
