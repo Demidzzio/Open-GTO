@@ -29,7 +29,7 @@ stock money_SaveConfig(file_cfg)
 
 stock money_Check(playerid)
 {
-	if (protect_money_Enabled != 1) {
+	if (!protect_money_Enabled) {
 		return 0;
 	}
 	new clientmoney = GetPlayerMoney(playerid);

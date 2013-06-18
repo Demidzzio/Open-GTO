@@ -14,6 +14,7 @@
 
 
 enum info_Player {
+	Float:Armour,
 	Money,
 	BankMoney,
 }

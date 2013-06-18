@@ -38,6 +38,7 @@
 #include "kernel\admin\mute"
 
 #include "kernel\player.inc"
+#include "kernel\player\armour"
 #include "kernel\player\fightstyle"
 #include "kernel\player\level"
 #include "kernel\player\money"
@@ -46,16 +47,16 @@
 #include "kernel\player\vip"
 #include "kernel\player\weapon"
 
-#include "kernel\protect\armour"
-#include "kernel\protect\chat"
-#include "kernel\protect\health"
-#include "kernel\protect\idle"
-#include "kernel\protect\jetpack"
+#include "kernel\protect\armour.inc"
+#include "kernel\protect\chat.inc"
+#include "kernel\protect\health.inc"
+#include "kernel\protect\idle.inc"
+#include "kernel\protect\jetpack.inc"
 #include "kernel\protect\money.inc"
-#include "kernel\protect\ping"
-#include "kernel\protect\rconlogin"
-#include "kernel\protect\speed"
-#include "kernel\protect\weapon"
+#include "kernel\protect\ping.inc"
+#include "kernel\protect\rconlogin.inc"
+#include "kernel\protect\speed.inc"
+#include "kernel\protect\weapon.inc"
 
 #include "kernel\quest"
 

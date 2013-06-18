@@ -30,7 +30,9 @@ stock kernel_LoadConfig(file_cfg)
 	log_LoadConfig(file_cfg);
 	lang_LoadConfig(file_cfg);
 	weather_LoadConfig(file_cfg);
+	// protection
 	money_LoadConfig(file_cfg);
+	armour_LoadConfig(file_cfg);
 	return 1;
 }
 
@@ -39,6 +41,8 @@ stock kernel_SaveConfig(file_cfg)
 	log_SaveConfig(file_cfg);
 	lang_SaveConfig(file_cfg);
 	weather_SaveConfig(file_cfg);
+	// protection
 	money_SaveConfig(file_cfg);
+	armour_SaveConfig(file_cfg);
 	return 1;
 }

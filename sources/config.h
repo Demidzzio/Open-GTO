@@ -55,6 +55,7 @@
 	Protect
 */
 #define PROTECT_MONEY_ENABLED	1
+#define PROTECT_ARMOUR_ENABLED	1
 
 /*
 	Mapicon streamer
