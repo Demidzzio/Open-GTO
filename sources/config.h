@@ -61,6 +61,7 @@
 #define PROTECT_PING_MAX_PING		500
 #define PROTECT_RCON_LOGIN_ENABLED	1
 #define PROTECT_JETPACK_ENABLED		1
+#define PROTECT_CHAT_ENABLED		1
 
 /*
 	Mapicon streamer
