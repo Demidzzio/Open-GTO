@@ -62,7 +62,8 @@
 #define PROTECT_RCON_LOGIN_ENABLED	1
 #define PROTECT_JETPACK_ENABLED		1
 #define PROTECT_CHAT_ENABLED		1
-
+#define PROTECT_IDLE_ENABLED		0
+#define PROTECT_IDLE_MAX			10
 /*
 	Mapicon streamer
 */
