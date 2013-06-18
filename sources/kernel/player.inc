@@ -16,6 +16,7 @@
 enum info_Player {
 	Float:Armour,
 	Float:Health,
+	IP[MAX_IP],
 	Money,
 	BankMoney,
 }
