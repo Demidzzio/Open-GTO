@@ -65,6 +65,7 @@
 #define PROTECT_IDLE_ENABLED		0
 #define PROTECT_IDLE_MAX			10
 #define PROTECT_WEAPON_ENABLED		1
+#define PROTECT_SPEED_ENABLED		1
 
 /*
 	Mapicon streamer
