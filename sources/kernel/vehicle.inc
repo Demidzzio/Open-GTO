@@ -256,7 +256,7 @@ new gVehicle[MAX_VEHICLES][info_Vehicle] = {0};
 
 stock vehicle_OnVehicleStreamIn(vehicleid, forplayerid)
 {
-	objective_OnVehicleStreamIn(vehicleid, forplayerid);
+	SetVehicleParamsForPlayer(vehicleid, forplayerid, gVehicle[vehicleid][Objective], gVehicle[vehicleid][Doorslocked]);
 }
 
 /*
@@ -369,13 +369,13 @@ stock vehicle_Create(modelid, Float:x, Float:y, Float:z, Float:angle, color1, co
 stock vehicle_Destroy(vehicleid)
 {
 	gVehicle[vehicleid][Model] = 0;
-	gVehicle[id][SpawnPos][0] = 0.0;
-	gVehicle[id][SpawnPos][1] = 0.0;
-	gVehicle[id][SpawnPos][2] = 0.0;
-	gVehicle[id][SpawnPos][3] = 0.0;
-	gVehicle[id][OldPos][0] = 0.0;
-	gVehicle[id][OldPos][1] = 0.0;
-	gVehicle[id][OldPos][2] = 0.0;
+	gVehicle[vehicleid][SpawnPos][0] = 0.0;
+	gVehicle[vehicleid][SpawnPos][1] = 0.0;
+	gVehicle[vehicleid][SpawnPos][2] = 0.0;
+	gVehicle[vehicleid][SpawnPos][3] = 0.0;
+	gVehicle[vehicleid][OldPos][0] = 0.0;
+	gVehicle[vehicleid][OldPos][1] = 0.0;
+	gVehicle[vehicleid][OldPos][2] = 0.0;
 	gVehicle[vehicleid][Color][0] = 0;
 	gVehicle[vehicleid][Color][1] = 0;
 	gVehicle[vehicleid][Paintjobid] = 0;
@@ -390,7 +390,7 @@ stock vehicle_Destroy(vehicleid)
 
 stock vehicle_SetPos(vehicleid, Float:x, Float:y, Float:z)
 {
-	foreach (Player, playerid) {
+	foreach (new playerid : Player) {
 		if (GetPlayerVehicleID(playerid) == vehicleid) {
 			gPlayer[playerid][OldPos][0] = x;
 			gPlayer[playerid][OldPos][1] = y;
@@ -676,9 +676,4 @@ stock vehicle_SetObjectiveStatus(vehicleid, bool:isEnabled)
 stock bool:vehicle_GetObjectiveStatus(vehicleid)
 {
 	return gVehicle[vehicleid][Objective];
-}
-
-stock objective_OnVehicleStreamIn(vehicleid, forplayerid)
-{
-	SetVehicleParamsForPlayer(vehicleid, forplayerid, gVehicle[vehicleid][Objective], gVehicle[vehicleid][Doorslocked]);
 }
