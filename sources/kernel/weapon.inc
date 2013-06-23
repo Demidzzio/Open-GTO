@@ -13,6 +13,7 @@
 #pragma library weapon
 
 
+#define MAX_WEAPON_SLOT	13
 
 stock player_GiveWeapon(playerid, weaponid, ammo)
 {
@@ -26,7 +27,7 @@ stock player_GiveWeapon(playerid, weaponid, ammo)
 
 stock player_ResetWeapon(playerid)
 {
-	for (new i = 0; i < PLAYER_WEAPON_SLOTS; i++) {
+	for (new i = 0; i < MAX_WEAPON_SLOT; i++) {
 		gPlayer[playerid][WeaponID][i] = 0;
 		gPlayer[playerid][WeaponAmmo][i] = 0;
 	}

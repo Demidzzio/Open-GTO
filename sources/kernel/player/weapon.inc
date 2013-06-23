@@ -13,9 +13,6 @@
 #pragma library player_weapon
 
 
-#define PLAYER_WEAPON_SLOTS	13
-
-
 stock weapon_GetSlot(weaponid)
 {
 	switch (weaponid) {

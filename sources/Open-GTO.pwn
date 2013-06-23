@@ -19,11 +19,6 @@
 #include "kernel\streamers\checkpoint"
 #include "kernel\streamers\mapicon"
 
-#include "kernel\vehicle\fuel"
-#include "kernel\vehicle\lock"
-#include "kernel\vehicle\speed"
-#include "kernel\vehicle"
-
 #include "kernel\weapon\drop"
 #include "kernel\weapon\skill"
 #include "kernel\weapon"
@@ -48,6 +43,11 @@
 #include "kernel\player\vehicle"
 #include "kernel\player\vip"
 #include "kernel\player\weapon"
+
+#include "kernel\vehicle.inc"
+#include "kernel\vehicle\fuel"
+#include "kernel\vehicle\lock"
+#include "kernel\vehicle\speed"
 
 #include "kernel\protect\armour.inc"
 #include "kernel\protect\chat.inc"

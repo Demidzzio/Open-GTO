@@ -73,7 +73,7 @@ stock weapon_Check(playerid)
 	}
 	
 	new weapon[2];
-	for (new i = 0; i < PLAYER_WEAPON_SLOTS; i++) {
+	for (new i = 0; i < MAX_WEAPON_SLOT; i++) {
 		GetPlayerWeaponData(playerid, i, weapon[0], weapon[1]);
 		
 		if ( weapon[0] != gPlayer[playerid][WeaponID][i] || weapon[1] > gPlayer[playerid][WeaponAmmo][i] ) {

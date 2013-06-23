@@ -57,6 +57,6 @@ stock kernel_SaveConfig(file_cfg)
 	chat_SaveConfig(file_cfg);
 	idle_SaveConfig(file_cfg);
 	weapon_SaveConfig(file_cfg);
-	speed_SaveConfig(file_cfg)
+	speed_SaveConfig(file_cfg);
 	return 1;
 }

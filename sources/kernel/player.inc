@@ -12,14 +12,15 @@
 #define _kplayer_included
 #pragma library kplayer
 
+
 enum info_Player {
 	Float:Armour,
 	Float:Health,
 	IP[MAX_IP],
 	Money,
 	BankMoney,
-	WeaponID[PLAYER_WEAPON_SLOTS],
-	WeaponAmmo[PLAYER_WEAPON_SLOTS],
+	WeaponID[MAX_WEAPON_SLOT],
+	WeaponAmmo[MAX_WEAPON_SLOT],
 	Float:OldPos[3],
 }
 new gPlayer[MAX_PLAYERS][info_Player];
