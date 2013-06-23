@@ -19,5 +19,7 @@ enum info_Player {
 	IP[MAX_IP],
 	Money,
 	BankMoney,
+	WeaponID[PLAYER_WEAPON_SLOTS],
+	WeaponAmmo[PLAYER_WEAPON_SLOTS],
 }
 new gPlayer[MAX_PLAYERS][info_Player];

@@ -38,6 +38,7 @@ stock kernel_LoadConfig(file_cfg)
 	jetpack_LoadConfig(file_cfg);
 	chat_LoadConfig(file_cfg);
 	idle_LoadConfig(file_cfg);
+	weapon_LoadConfig(file_cfg);
 	return 1;
 }
 
@@ -54,5 +55,6 @@ stock kernel_SaveConfig(file_cfg)
 	jetpack_SaveConfig(file_cfg);
 	chat_SaveConfig(file_cfg);
 	idle_SaveConfig(file_cfg);
+	weapon_SaveConfig(file_cfg);
 	return 1;
 }
