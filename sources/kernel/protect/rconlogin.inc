@@ -13,23 +13,23 @@
 #pragma library rconlogin
 
 
-new protect_rconlogin_Enabled = PROTECT_RCON_LOGIN_ENABLED;
+new bool:protect_rconlogin_enabled = PROTECT_RCON_LOGIN_ENABLED;
 
 stock rconlogin_LoadConfig(file_cfg)
 {
-	ini_getInteger(file_cfg, "protect_rconlogin_Enabled", protect_rconlogin_Enabled);
+	ini_getInteger(file_cfg, "protect_rconlogin_enabled", protect_rconlogin_enabled);
 	return 1;
 }
 
 stock rconlogin_SaveConfig(file_cfg)
 {
-	ini_setInteger(file_cfg, "protect_rconlogin_Enabled", protect_rconlogin_Enabled);
+	ini_setInteger(file_cfg, "protect_rconlogin_enabled", protect_rconlogin_enabled);
 	return 1;
 }
 
 stock rconlogin_OnRconLoginAttempt(ip[], password[], success)
 {
-	if (!protect_rconlogin_Enabled || success) {
+	if (!protect_rconlogin_enabled || success) {
 		return 0;
 	}
 	

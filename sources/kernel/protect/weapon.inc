@@ -13,23 +13,23 @@
 #pragma library pweapon
 
 
-new protect_weapon_Enabled = PROTECT_WEAPON_ENABLED;
+new bool:protect_weapon_enabled = PROTECT_WEAPON_ENABLED;
 
 stock weapon_LoadConfig(file_cfg)
 {
-	ini_getInteger(file_cfg, "protect_weapon_Enabled", protect_weapon_Enabled);
+	ini_getInteger(file_cfg, "protect_weapon_enabled", protect_weapon_enabled);
 	return 1;
 }
 
 stock weapon_SaveConfig(file_cfg)
 {
-	ini_setInteger(file_cfg, "protect_weapon_Enabled", protect_weapon_Enabled);
+	ini_setInteger(file_cfg, "protect_weapon_enabled", protect_weapon_enabled);
 	return 1;
 }
 
 stock weapon_OnPlayerPickUpPickup(playerid, pickupid)
 {
-	if (!protect_weapon_Enabled) {
+	if (!protect_weapon_enabled) {
 		return 0;
 	}
 	
@@ -52,7 +52,7 @@ stock weapon_OnPlayerPickUpPickup(playerid, pickupid)
 
 stock weapon_OnPlayerExitVehicle(playerid, vehicleid)
 {
-	if (!protect_weapon_Enabled) {
+	if (!protect_weapon_enabled) {
 		return 0;
 	}
 	
@@ -68,7 +68,7 @@ stock weapon_OnPlayerExitVehicle(playerid, vehicleid)
 
 stock weapon_Check(playerid)
 {
-	if (!protect_weapon_Enabled) {
+	if (!protect_weapon_enabled) {
 		return 0;
 	}
 	

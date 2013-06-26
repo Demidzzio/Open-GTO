@@ -13,27 +13,27 @@
 #pragma library idle
 
 
-new protect_idle_Enabled = PROTECT_IDLE_ENABLED,
-	protect_idle_Max = PROTECT_IDLE_MAX;
+new bool:protect_idle_enabled = PROTECT_IDLE_ENABLED,
+	protect_idle_max = PROTECT_IDLE_MAX;
 
 stock idle_LoadConfig(file_cfg)
 {
-	ini_getInteger(file_cfg, "protect_idle_Enabled", protect_idle_Enabled);
-	ini_getInteger(file_cfg, "protect_idle_Max", protect_idle_Max);
+	ini_getInteger(file_cfg, "protect_idle_enabled", protect_idle_enabled);
+	ini_getInteger(file_cfg, "protect_idle_max", protect_idle_max);
 	return 1;
 }
 
 stock idle_SaveConfig(file_cfg)
 {
-	ini_setInteger(file_cfg, "protect_idle_Enabled", protect_idle_Enabled);
-	ini_setInteger(file_cfg, "protect_idle_Max", protect_idle_Max);
+	ini_setInteger(file_cfg, "protect_idle_enabled", protect_idle_enabled);
+	ini_setInteger(file_cfg, "protect_idle_max", protect_idle_max);
 	return 1;
 }
 
 stock idle_Check(playerid)
 {
 	// todo: add admin ignoring
-	if (!protect_idle_Enabled) {
+	if (!protect_idle_enabled) {
 		return 0;
 	}
 	
@@ -45,12 +45,12 @@ stock idle_Check(playerid)
 		new idle_time = player_GetIdleTime(playerid) + 1;
 		player_SetIdleTime(playerid, idle_time);
 		
-		if (idle_time > protect_idle_Max) {
+		if (idle_time > protect_idle_max) {
 			player_SetIdleTime(playerid, 0);
 			player_Kick(playerid, _(IDLE_KICK));
-		} else if (idle_time > protect_idle_Max - 1) {
+		} else if (idle_time > protect_idle_max - 1) {
 			new string[MAX_STRING];
-			format(string, sizeof(string), _(IDLE_INFO), protect_idle_Max - 1);
+			format(string, sizeof(string), _(IDLE_INFO), protect_idle_max - 1);
 			SendClientMessage(playerid, 0xFF000000, string);
 			SendClientMessage(playerid, 0xFF000000, _(IDLE_LAST));
 		}

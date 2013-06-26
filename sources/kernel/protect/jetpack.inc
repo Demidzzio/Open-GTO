@@ -13,23 +13,23 @@
 #pragma library jetpack
 
 
-new protect_jetpack_Enabled = PROTECT_JETPACK_ENABLED;
+new bool:protect_jetpack_enabled = PROTECT_JETPACK_ENABLED;
 
 stock jetpack_LoadConfig(file_cfg)
 {
-	ini_getInteger(file_cfg, "protect_jetpack_Enabled", protect_jetpack_Enabled);
+	ini_getInteger(file_cfg, "protect_jetpack_enabled", protect_jetpack_enabled);
 	return 1;
 }
 
 stock jetpack_SaveConfig(file_cfg)
 {
-	ini_setInteger(file_cfg, "protect_jetpack_Enabled", protect_jetpack_Enabled);
+	ini_setInteger(file_cfg, "protect_jetpack_enabled", protect_jetpack_enabled);
 	return 1;
 }
 
 stock jetpack_Check(playerid)
 {
-	if (!protect_jetpack_Enabled) {
+	if (!protect_jetpack_enabled) {
 		return 0;
 	}
 	if (GetPlayerSpecialAction(playerid) == SPECIAL_ACTION_USEJETPACK) {

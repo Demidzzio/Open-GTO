@@ -13,7 +13,7 @@
 #pragma library player
 
 
-static gPlayerStartMoney = PLAYER_START_MONEY;
+static player_start_money = PLAYER_START_MONEY;
 
 stock player_OnGameModeInit()
 {
@@ -23,19 +23,19 @@ stock player_OnGameModeInit()
 
 stock player_LoadConfig(file_cfg)
 {
-	ini_getInteger(file_cfg, "player_StartMoney", gPlayerStartMoney);
+	ini_getInteger(file_cfg, "player_start_money", player_start_money);
 	return 1;
 }
 
 stock player_SaveConfig(file_cfg)
 {
-	ini_setInteger(file_cfg, "player_StartMoney", gPlayerStartMoney);
+	ini_setInteger(file_cfg, "player_start_money", player_start_money);
 	return 1;
 }
 
 stock player_Create(playerid)
 {
-	player_SetMoney(playerid, gPlayerStartMoney);
+	player_SetMoney(playerid, player_start_money);
 	player_Save(playerid);
 	return 1;
 }

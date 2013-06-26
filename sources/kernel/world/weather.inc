@@ -13,7 +13,7 @@
 #pragma library weather
 
 
-static gWeatherUpdateTime = WEATHER_UPDATE_TIME;
+static weather_update_time = WEATHER_UPDATE_TIME;
 
 stock weather_OnGameModeInit()
 {
@@ -22,26 +22,26 @@ stock weather_OnGameModeInit()
 
 stock weather_LoadConfig(file_cfg)
 {
-	ini_getInteger(file_cfg, "weather_UpdateTime", gWeatherUpdateTime);
+	ini_getInteger(file_cfg, "weather_update_time", weather_update_time);
 	return 1;
 }
 
 stock weather_SaveConfig(file_cfg)
 {
-	ini_setInteger(file_cfg, "weather_UpdateTime", gWeatherUpdateTime);
+	ini_setInteger(file_cfg, "weather_update_time", weather_update_time);
 	return 1;
 }
 
 stock weather_Update()
 {
-	if (gWeatherUpdateTime == 0) {
+	if (weather_update_time == 0) {
 		return 0;
 	}
 	
 	static timer_ticks;
 	timer_ticks++;
 	
-	if (timer_ticks >= gWeatherUpdateTime) {
+	if (timer_ticks >= weather_update_time) {
 		timer_ticks = 0;
 		
 		new weatherid;

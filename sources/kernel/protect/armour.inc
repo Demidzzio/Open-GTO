@@ -13,23 +13,23 @@
 #pragma library armour
 
 
-new protect_armour_Enabled = PROTECT_ARMOUR_ENABLED;
+new bool:protect_armour_enabled = PROTECT_ARMOUR_ENABLED;
 
 stock armour_LoadConfig(file_cfg)
 {
-	ini_getInteger(file_cfg, "protect_armour_Enabled", protect_armour_Enabled);
+	ini_getInteger(file_cfg, "protect_armour_enabled", protect_armour_enabled);
 	return 1;
 }
 
 stock armour_SaveConfig(file_cfg)
 {
-	ini_setInteger(file_cfg, "protect_armour_Enabled", protect_armour_Enabled);
+	ini_setInteger(file_cfg, "protect_armour_enabled", protect_armour_enabled);
 	return 1;
 }
 
 stock armour_OnPlayerPickUpPickup(playerid, pickupid)
 {
-	if (!protect_armour_Enabled) {
+	if (!protect_armour_enabled) {
 		return 0;
 	}
 	if (GetPickupModel(pickupid) == 1242) {
@@ -40,7 +40,7 @@ stock armour_OnPlayerPickUpPickup(playerid, pickupid)
 
 stock armour_Check(playerid)
 {
-	if (!protect_armour_Enabled) {
+	if (!protect_armour_enabled) {
 		return 0;
 	}
 	new Float:serverarmour = player_GetArmour(playerid);

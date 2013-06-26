@@ -13,31 +13,31 @@
 #pragma library ping
 
 
-new protect_ping_Enabled = PROTECT_PING_ENABLED,
-	protect_ping_MaxPing = PROTECT_PING_MAX_PING;
+new bool:protect_ping_enabled = PROTECT_PING_ENABLED,
+	protect_ping_maxping = PROTECT_PING_MAX_PING;
 
 stock ping_LoadConfig(file_cfg)
 {
-	ini_getInteger(file_cfg, "protect_ping_Enabled", protect_ping_Enabled);
-	ini_getInteger(file_cfg, "protect_ping_MaxPing", protect_ping_MaxPing);
+	ini_getInteger(file_cfg, "protect_ping_enabled", protect_ping_enabled);
+	ini_getInteger(file_cfg, "protect_ping_maxping", protect_ping_maxping);
 	return 1;
 }
 
 stock ping_SaveConfig(file_cfg)
 {
-	ini_setInteger(file_cfg, "protect_ping_Enabled", protect_ping_Enabled);
-	ini_setInteger(file_cfg, "protect_ping_MaxPing", protect_ping_MaxPing);
+	ini_setInteger(file_cfg, "protect_ping_enabled", protect_ping_enabled);
+	ini_setInteger(file_cfg, "protect_ping_maxping", protect_ping_maxping);
 	return 1;
 }
 
 stock ping_Check(playerid)
 {
-	if (!protect_ping_Enabled) {
+	if (!protect_ping_enabled) {
 		return 0;
 	}
-	if (GetPlayerPing(playerid) > protect_ping_MaxPing) {
+	if (GetPlayerPing(playerid) > protect_ping_maxping) {
 		new string[MAX_STRING];
-		format(string, sizeof(string), _(PROTECT_PING_KICK), protect_ping_MaxPing);
+		format(string, sizeof(string), _(PROTECT_PING_KICK), protect_ping_maxping);
 		player_Kick(playerid, string);
 	}
 	return 1;

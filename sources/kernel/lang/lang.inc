@@ -36,13 +36,13 @@ stock lang_OnGameModeInit()
 
 stock lang_LoadConfig(file_cfg)
 {
-	ini_getString(file_cfg, "Language", lang_Use);
+	ini_getString(file_cfg, "lang_use", lang_Use);
 	return 1;
 }
 
 stock lang_SaveConfig(file_cfg)
 {
-	ini_setString(file_cfg, "Language", lang_Use);
+	ini_setString(file_cfg, "lang_use", lang_Use);
 	return 1;
 }
 

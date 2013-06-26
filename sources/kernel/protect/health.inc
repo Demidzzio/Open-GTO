@@ -13,23 +13,23 @@
 #pragma library health
 
 
-new protect_health_Enabled = PROTECT_HEALTH_ENABLED;
+new bool:protect_health_enabled = PROTECT_HEALTH_ENABLED;
 
 stock health_LoadConfig(file_cfg)
 {
-	ini_getInteger(file_cfg, "protect_health_Enabled", protect_health_Enabled);
+	ini_getInteger(file_cfg, "protect_health_enabled", protect_health_enabled);
 	return 1;
 }
 
 stock health_SaveConfig(file_cfg)
 {
-	ini_setInteger(file_cfg, "protect_health_Enabled", protect_health_Enabled);
+	ini_setInteger(file_cfg, "protect_health_enabled", protect_health_enabled);
 	return 1;
 }
 
 stock health_OnPlayerPickUpPickup(playerid, pickupid)
 {
-	if (!protect_health_Enabled) {
+	if (!protect_health_enabled) {
 		return 0;
 	}
 	if (GetPickupModel(pickupid) == 1242) {
@@ -40,7 +40,7 @@ stock health_OnPlayerPickUpPickup(playerid, pickupid)
 
 stock health_Check(playerid)
 {
-	if (!protect_health_Enabled) {
+	if (!protect_health_enabled) {
 		return 0;
 	}
 	new Float:serverhealth = player_GetHealth(playerid);
