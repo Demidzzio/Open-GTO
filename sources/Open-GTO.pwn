@@ -7,12 +7,12 @@
 
 #include <..\compiler\includes\a_samp>
 
-#include "config.h"
+#include "config\config.h"
 
-#include "kernel\config.inc"
+#include "kernel\config\config.inc"
 #include "kernel\lib\utils"
-#include "kernel\lang"
-#include "kernel\log"
+#include "kernel\lang\lang"
+#include "kernel\log\log"
 #include "kernel\lib\foreach"
 #include "kernel\lib\mxINI"
 
@@ -21,8 +21,9 @@
 
 #include "kernel\weapon\drop"
 #include "kernel\weapon\skill"
-#include "kernel\weapon"
+#include "kernel\weapon\weapon"
 
+#include "kernel\world\game.inc"
 #include "kernel\world\enterexits"
 #include "kernel\world\weather"
 #include "kernel\world\zones"
@@ -32,7 +33,7 @@
 #include "kernel\admin\kick"
 #include "kernel\admin\mute"
 
-#include "kernel\player.inc"
+#include "kernel\player\player.inc"
 #include "kernel\player\armour"
 #include "kernel\player\fightstyle"
 #include "kernel\player\health"
@@ -44,7 +45,7 @@
 #include "kernel\player\vip"
 #include "kernel\player\weapon"
 
-#include "kernel\vehicle.inc"
+#include "kernel\vehicle\vehicle.inc"
 #include "kernel\vehicle\fuel"
 #include "kernel\vehicle\lock"
 #include "kernel\vehicle\speed"
@@ -60,18 +61,20 @@
 #include "kernel\protect\speed.inc"
 #include "kernel\protect\weapon.inc"
 
-#include "kernel\quest"
+#include "kernel\quest\quest"
+
+#include "kernel\kernel"
 
 
 #include "admin\commands"
 #include "admin\menu"
-#include "admin"
+#include "admin\admin"
 
 #include "gang\commands"
 #include "gang\menu"
-#include "gang"
+#include "gang\gang"
 
-#include "player"
+#include "player\player"
 #include "player\commands"
 #include "player\menu"
 
@@ -92,9 +95,9 @@
 #include "services\weaponshop"
 
 #include "world\groundhold"
-#include "world"
+#include "world\world"
 
-#include "config"
+#include "config\config"
 
 
 main() {}
@@ -102,16 +105,13 @@ main() {}
 public OnGameModeInit()
 {
 	log_Game("Open-GTO: init...");
-	// kernel
-	kernel_OnGameModeInit();
-	
 	// load configure
 	config_OnGameModeInit();
 	
-	// init all modules
-	lang_OnGameModeInit();
-	log_OnGameModeInit();
-	weather_OnGameModeInit();
+	// kernel
+	kernel_OnGameModeInit();
+	
+	// init gm modules
 	player_OnGameModeInit();
 	
 	// save world

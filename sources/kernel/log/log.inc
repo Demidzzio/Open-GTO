@@ -21,10 +21,10 @@ enum {
 }
 
 new log_dir[][] = {
-	GTO_FILES_FOLDER "log/game/",
-	GTO_FILES_FOLDER "log/user/",
-	GTO_FILES_FOLDER "log/error/",
-	GTO_FILES_FOLDER "log/debug/"
+	DATA_FILES_FOLDER "log/game/",
+	DATA_FILES_FOLDER "log/user/",
+	DATA_FILES_FOLDER "log/error/",
+	DATA_FILES_FOLDER "log/debug/"
 };
 
 new log_Game_On = LOG_GAME_ENABLED,

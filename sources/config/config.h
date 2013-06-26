@@ -16,13 +16,13 @@
 	System
 */
 #define GTO_VERSION				"2.0"
-#define GTO_FILES_FORMAT		".ini"
-#define GTO_FILES_FOLDER		"open-gto/"
-#define GTO_TEXT				"Open-GTO v"#GTO_VERSION
+#define DATA_FILES_FORMAT		".ini"
+#define DATA_FILES_FOLDER		"open-gto/"
+#define GAME_MODE_TEXT			"Open-GTO v"#GTO_VERSION
 
 #define LANG_USE				"russian"
 
-#define FILE_CONFIG				(GTO_FILES_FOLDER "config"GTO_FILES_FORMAT)
+#define FILE_CONFIG				(DATA_FILES_FOLDER "config"DATA_FILES_FORMAT)
 #define ini_fileExist			fexist
 
 /*

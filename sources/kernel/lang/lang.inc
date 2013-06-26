@@ -23,13 +23,13 @@ static lang_Use[16] = LANG_USE;
 stock lang_OnGameModeInit()
 {
 	new lang_file[MAX_STRING];
-	format(lang_file, sizeof(lang_file), GTO_FILES_FOLDER "lang/%s"GTO_FILES_FORMAT, lang_Use);
+	format(lang_file, sizeof(lang_file), DATA_FILES_FOLDER "lang/%s"DATA_FILES_FORMAT, lang_Use);
 	
 	new success = lang_ReadFile(lang_file);
 	if (success) {
 		log_Game("Lang: module init");
 	} else {
-		log_Error("Lang: error: no such language file '"GTO_FILES_FOLDER "lang/%s"GTO_FILES_FORMAT"'", lang_Use);
+		log_Error("Lang: error: no such language file '"DATA_FILES_FOLDER "lang/%s"DATA_FILES_FORMAT"'", lang_Use);
 	}
 	return 1;
 }

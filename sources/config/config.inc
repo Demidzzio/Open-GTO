@@ -15,9 +15,6 @@
 
 stock config_OnGameModeInit()
 {
-	// sa-mp settings
-	SetGameModeText(GTO_TEXT);
-	
 	// modules settings
 	new file_cfg = ini_openFile(FILE_CONFIG);
 	if (file_cfg > 0) {
