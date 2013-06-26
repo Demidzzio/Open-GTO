@@ -17,7 +17,7 @@ stock config_OnGameModeInit()
 {
 	// modules settings
 	new file_cfg = ini_openFile(FILE_CONFIG);
-	if (file_cfg > 0) {
+	if (file_cfg >= 0) {
 		kernel_LoadConfig(file_cfg);
 		player_LoadConfig(file_cfg);
 		
