@@ -31,19 +31,8 @@ stock player_GiveMoney(playerid, money, showtext = 0)
 		money = PLAYER_MAX_MONEY - player_GetMoney(playerid);
 		
 		new player_name[MAX_PLAYER_MONEY + 1];
-		GetPlayerName(playerid, player_name, sizeof(player_name));
+		player_GetName(playerid, player_name, sizeof(player_name));
 		log_User(_(PLAYER_HAVE_MAX_MONEY), player_name, playerid);
-	}
-	
-	if (showtext == 1) {
-		new string[MAX_STRING];
-		if (money > 0) {
-			format(string, sizeof(string), _(YOU_GET_MONEY), money);
-			SendClientMessage(playerid, COLOR_MONEY_GOOD, string);
-		} else {
-			format(string, sizeof(string), _(YOU_LOSE_MONEY), -money);
-			SendClientMessage(playerid, COLOR_MONEY_BAD, string);
-		}
 	}
 	
 	return player_SetMoney(playerid, player_GetMoney(playerid) + money);
