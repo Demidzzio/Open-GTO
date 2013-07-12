@@ -291,7 +291,7 @@ stock Float:vehicle_GetMaxSpeed(model)
 	Speed
 */
 
-stock setVehicleSpeed ( vehicleid, speed_mph ) // by MX_Master
+stock vehicle_SetSpeed ( vehicleid, speed_mph ) // by MX_Master
 {
 	if ( speed_mph < 1 ) speed_mph = 1;
 
@@ -616,7 +616,7 @@ stock vehicle_RemoveComponentInSlot(vehicleid, slot)
 
 stock vehicle_UpdateDamageStatus(vehicleid, panels, doors, lights, tires)
 {
-	return vehicle_UpdateDamageStatus(vehicleid, panels, doors, lights, tires);
+	return UpdateDamageStatus(vehicleid, panels, doors, lights, tires);
 }
 
 stock vehicle_GetDamageStatus(vehicleid, &panels, &doors, &lights, &tires)
