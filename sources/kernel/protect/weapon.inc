@@ -72,14 +72,18 @@ stock weapon_Check(playerid)
 		return 0;
 	}
 	
-	new weapon[2];
+	new weapon_id, weapon_ammo;
 	for (new i = 0; i < MAX_WEAPON_SLOT; i++) {
-		GetPlayerWeaponData(playerid, i, weapon[0], weapon[1]);
+		GetPlayerWeaponData(playerid, i, weapon_id, weapon_ammo);
 		
-		if ( weapon[0] != gPlayer[playerid][WeaponID][i] || weapon[1] > gPlayer[playerid][WeaponAmmo][i] ) {
+		if (weapon_id != 0 && (weapon_id != gPlayer[playerid][WeaponID][i] || weapon_ammo > gPlayer[playerid][WeaponAmmo][i])) {
 			player_Kick(playerid, _(WEAPON_HACK));
+			return 1;
 		}
+		
+		gPlayer[playerid][WeaponID][i] = weapon_id;
+		gPlayer[playerid][WeaponAmmo][i] = (weapon_id == 0) ? 0 : weapon_ammo;
 	}
-	return 1;
+	return 0;
 }
 
