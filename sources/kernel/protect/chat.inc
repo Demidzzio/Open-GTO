@@ -514,20 +514,18 @@ stock tooManyUpperChars ( string[] )
 
 
 
-stock chat_LoadConfig(file_cfg)
+stock Chat_LoadConfig(file_cfg)
 {
 	ini_getInteger(file_cfg, "protect_chat_enabled", protect_chat_enabled);
-	return 1;
 }
 
-stock chat_SaveConfig(file_cfg)
+stock Chat_SaveConfig(file_cfg)
 {
 	ini_setInteger(file_cfg, "protect_chat_enabled", protect_chat_enabled);
-	return 1;
 }
 
 
-stock chat_OnGameModeInit()
+stock Chat_OnGameModeInit()
 {
 	if (!protect_chat_enabled) {
 		return;
@@ -539,7 +537,7 @@ stock chat_OnGameModeInit()
 
 #undef CHAT_HISTORY_SIZE
 
-stock chat_OnPlayerConnect ( playerid )
+stock Chat_OnPlayerConnect ( playerid )
 {
 	if (!protect_chat_enabled) {
 		return 0;
@@ -548,7 +546,7 @@ stock chat_OnPlayerConnect ( playerid )
     return 1;
 }
 
-stock chat_OnPlayerDisconnect ( playerid, reason )
+stock Chat_OnPlayerDisconnect ( playerid, reason )
 {
 	#pragma unused reason
 	if (!protect_chat_enabled) {
@@ -563,7 +561,7 @@ stock chat_OnPlayerDisconnect ( playerid, reason )
 
 
 
-stock chat_OnPlayerText ( playerid, text[] )
+stock Chat_OnPlayerText ( playerid, text[] )
 {
 	if (!protect_chat_enabled || IsPlayerAdm(playerid)) {
 		return 1;

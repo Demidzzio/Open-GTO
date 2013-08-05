@@ -15,10 +15,10 @@
 /*
 	System
 */
-#define GTO_VERSION				"2.0"
+#define GAME_MODE_VERSION		"2.0"
+#define GAME_MODE_TEXT			"Open-GTO v"#GTO_VERSION
 #define DATA_FILES_FORMAT		".ini"
 #define DATA_FILES_FOLDER		"open-gto/"
-#define GAME_MODE_TEXT			"Open-GTO v"#GTO_VERSION
 
 #define LANG_USE				"russian"
 

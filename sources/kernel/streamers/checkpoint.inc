@@ -19,7 +19,7 @@ enum info_CP {
 }
 static gCheckpoints[MAX_CP][info_CP];
 
-stock cp_IsValid(cpid)
+stock Checkpoint_IsValid(cpid)
 {
 	if (gCheckpoints[cpid][CP_X] == 0.0 && gCheckpoints[cpid][CP_Y] == 0.0 && gCheckpoints[cpid][CP_Z] == 0.0 && gCheckpoints[cpid][CP_Size] == 0.0) {
 		return 0;
@@ -27,23 +27,23 @@ stock cp_IsValid(cpid)
 	return 1;
 }
 
-stock cp_GetFreeSlot()
+stock Checkpoint_GetFreeSlot()
 {
 	for (new cpid = 1; cpid <= MAX_ACTIVECP; cpid++) {
-		if (!cp_IsValid(cpid)) {
+		if (!Checkpoint_IsValid(cpid)) {
 			return cpid;
 		}
 	}
 	return 0;
 }
 
-stock cp_Timer()
+stock Checkpoint_Timer()
 {
 	foreach (new playerid : Player) {
 		if (GetPlayerQuestID(playerid) == INVALID_QUEST_ID) {
-			new cpid = cp_GetClosestId(playerid);
+			new cpid = Checkpoint_GetClosestId(playerid);
 			if (cpid != 0) {
-				cp_Active(playerid, cpid);
+				Checkpoint_Active(playerid, cpid);
 			} else {
 				oDisablePlayerCheckpoint(playerid);
 			}
@@ -51,9 +51,9 @@ stock cp_Timer()
 	}
 }
 
-stock cp_Add(Float:cpx, Float:cpy, Float:cpz, Float:cpsize)
+stock Checkpoint_Add(Float:cpx, Float:cpy, Float:cpz, Float:cpsize)
 {
-	new cpid = cp_GetFreeSlot();
+	new cpid = Checkpoint_GetFreeSlot();
 	if (cpid == 0) {
 		Log_Error(_(CP_IS_MAX), MAX_CP);
 		return 0;
@@ -65,9 +65,9 @@ stock cp_Add(Float:cpx, Float:cpy, Float:cpz, Float:cpsize)
 	return cpid;
 }
 
-stock cp_Remove(cpid)
+stock Checkpoint_Remove(cpid)
 {
-	if (!cp_IsValid(cpid)) {
+	if (!Checkpoint_IsValid(cpid)) {
 		return 0;
 	}
 	gCheckpoints[cpid][CP_X] = 0;
@@ -77,7 +77,7 @@ stock cp_Remove(cpid)
 	return 1;
 }
 
-stock cp_GetIdByPos(Float:cpx, Float:cpy, Float:cpz)
+stock Checkpoint_GetIdByPos(Float:cpx, Float:cpy, Float:cpz)
 {
 	for (new cpid = 1; cpid <= MAX_CP; cpid++) {
 		if (cpx == gCheckpoints[cpid][CP_X] && cpy == gCheckpoints[cpid][CP_X] && cpz == gCheckpoints[cpid][CP_Z]) {
@@ -87,23 +87,23 @@ stock cp_GetIdByPos(Float:cpx, Float:cpy, Float:cpz)
 	return 0;
 }
 
-stock cp_Active(playerid, cpid)
+stock Checkpoint_Active(playerid, cpid)
 {
-	if (!IsPlayerConnected(playerid) || !cp_IsValid(cpid)) {
+	if (!IsPlayerConnected(playerid) || !Checkpoint_IsValid(cpid)) {
 		return 0;
 	}
-	if (gPlayerCp[playerid][Coord_X] == gCheckpoints[cpid][CP_X] && gPlayerCp[playerid][Coord_Y] == gCheckpoints[cpid][CP_Y] && gPlayerCp[playerid][Coord_Z] == gCheckpoints[cpid][CP_Z]) {
+	if (gPlayerCheckpoint[playerid][Coord_X] == gCheckpoints[cpid][CP_X] && gPlayerCheckpoint[playerid][Coord_Y] == gCheckpoints[cpid][CP_Y] && gPlayerCheckpoint[playerid][Coord_Z] == gCheckpoints[cpid][CP_Z]) {
 		return 0;
 	}
 	oSetPlayerCheckpoint(playerid, gCheckpoints[cpid][CP_X], gCheckpoints[cpid][CP_Y], gCheckpoints[cpid][CP_Z], gCheckpoints[cpid][CP_Size]);
 	return 1;
 }
 
-stock cp_GetClosestId(playerid)
+stock Checkpoint_GetClosestId(playerid)
 {
  	new Float:mindist = CP_SHOW_DIST, Float:playerdist, retval = 0;
 	for (new cpid = 1; cpid < MAX_CP; cpid++) {
-		if (!cp_IsValid(cpid)) {
+		if (!Checkpoint_IsValid(cpid)) {
 			continue;
 		}
 		playerdist = GetPlayerDistanceFromPoint(playerid, gCheckpoints[cpid][CP_X], gCheckpoints[cpid][CP_Y], gCheckpoints[cpid][CP_Z]);
@@ -120,50 +120,50 @@ enum info_Checkpoint {
 	Float:Coord_Y,
 	Float:Coord_Z
 }
-static Float:gPlayerCp[MAX_PLAYERS][info_Checkpoint];
+static Float:gPlayerCheckpoint[MAX_PLAYERS][info_Checkpoint];
 
-stock cp_Set(playerid, Float:x, Float:y, Float:z, Float:size)
+stock Checkpoint_Set(playerid, Float:x, Float:y, Float:z, Float:size)
 {
 	/*DisablePlayerCheckpoint(playerid);
 	SetPlayerCheckpoint(playerid, 0.0, 0.0, 0.0, size);
 	DisablePlayerCheckpoint(playerid);*/
-	gPlayerCp[playerid][Coord_X] = x;
-	gPlayerCp[playerid][Coord_Y] = y;
-	gPlayerCp[playerid][Coord_Z] = z;
+	gPlayerCheckpoint[playerid][Coord_X] = x;
+	gPlayerCheckpoint[playerid][Coord_Y] = y;
+	gPlayerCheckpoint[playerid][Coord_Z] = z;
 	SetPlayerCheckpoint(playerid, x, y, z, size);
 }
 
-stock cp_Disable(playerid)
+stock Checkpoint_Disable(playerid)
 {
-	gPlayerCp[playerid][Coord_X] = 0.0;
-	gPlayerCp[playerid][Coord_Y] = 0.0;
-	gPlayerCp[playerid][Coord_Z] = 0.0;
+	gPlayerCheckpoint[playerid][Coord_X] = 0.0;
+	gPlayerCheckpoint[playerid][Coord_Y] = 0.0;
+	gPlayerCheckpoint[playerid][Coord_Z] = 0.0;
 	DisablePlayerCheckpoint(playerid);
 }
 
-stock cp_IsIn(playerid, Float:dist, Float:cpx, Float:cpy, Float:cpz)
+stock Checkpoint_IsIn(playerid, Float:dist, Float:cpx, Float:cpy, Float:cpz)
 {
-	if (cpx == gPlayerCp[playerid][Coord_X] && cpy == gPlayerCp[playerid][Coord_X] && cpz == gPlayerCp[playerid][Coord_Z]
+	if (cpx == gPlayerCheckpoint[playerid][Coord_X] && cpy == gPlayerCheckpoint[playerid][Coord_X] && cpz == gPlayerCheckpoint[playerid][Coord_Z]
 		&& IsPlayerInRangeOfPoint(playerid, dist, cpx, cpy, cpz)) {
 		return IsPlayerInCheckpoint(playerid);
 	}
 	return 0;
 }
 
-stock cp_GetPos(playerid, &Float:X, &Float:Y, &Float:Z)
+stock Checkpoint_GetPos(playerid, &Float:X, &Float:Y, &Float:Z)
 {
-	if (!cp_IsActive(playerid)) {
+	if (!Checkpoint_IsActive(playerid)) {
 		return 0;
 	}
-	X = gPlayerCp[playerid][Coord_X];
-	Y = gPlayerCp[playerid][Coord_Y];
-	Z = gPlayerCp[playerid][Coord_Z];
+	X = gPlayerCheckpoint[playerid][Coord_X];
+	Y = gPlayerCheckpoint[playerid][Coord_Y];
+	Z = gPlayerCheckpoint[playerid][Coord_Z];
 	return 1;
 }
 
-stock cp_IsActive(playerid)
+stock Checkpoint_IsActive(playerid)
 {
-	if (gPlayerCp[playerid][Coord_X] == 0.0 && gPlayerCp[playerid][Coord_Y] == 0.0 && gPlayerCp[playerid][Coord_Z] == 0.0) {
+	if (gPlayerCheckpoint[playerid][Coord_X] == 0.0 && gPlayerCheckpoint[playerid][Coord_Y] == 0.0 && gPlayerCheckpoint[playerid][Coord_Z] == 0.0) {
 		return 0;
 	}
 	return 1;

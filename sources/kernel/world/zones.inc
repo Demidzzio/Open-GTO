@@ -394,7 +394,7 @@ new gZones[][info_Zone] = {
 };
 
 
-stock zone_GetName(name[MAX_NAME], Float:x, Float:y, Float:z)
+stock Zone_GetName(name[MAX_NAME], Float:x, Float:y, Float:z)
 {
 	if (x == 0.0 && y == 0.0) {
 		set(name, "Unknown");
@@ -409,7 +409,7 @@ stock zone_GetName(name[MAX_NAME], Float:x, Float:y, Float:z)
 	return 1;
 }
 
-stock zone_GetId(Float:x, Float:y, Float:z)
+stock Zone_GetId(Float:x, Float:y, Float:z)
 {
 	for (new zoneid = 0; zoneid < sizeof(gZones); zoneid++) {
 		if (zone_IsIn(zoneid, x, y, z)) {
@@ -419,7 +419,7 @@ stock zone_GetId(Float:x, Float:y, Float:z)
 	return -1;
 }
 
-stock zone_IsIn(zoneid, Float:x, Float:y, Float:z)
+stock Zone_IsIn(zoneid, Float:x, Float:y, Float:z)
 {
 	if (   x >= gZones[zoneid][zone_minx] && x < gZones[zoneid][zone_maxx]
 		&& y >= gZones[zoneid][zone_miny] && y < gZones[zoneid][zone_maxy]
@@ -430,14 +430,14 @@ stock zone_IsIn(zoneid, Float:x, Float:y, Float:z)
 	return 0;
 }
 
-stock zone_IsPlayerIn(playerid, zoneid)
+stock Zone_IsPlayerIn(playerid, zoneid)
 {
 	new Float:x, Float:y, Float:z;
 	GetPlayerPos(playerid, x, y, z);
 	return zone_IsIn(zoneid, x, y, z);
 }
 
-stock zone_IsPlayerInName(playerid, zonename[])
+stock Zone_IsPlayerInName(playerid, zonename[])
 {
 	new Float:x, Float:y, Float:z;
 	GetPlayerPos(playerid, x, y, z);

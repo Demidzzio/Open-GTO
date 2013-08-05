@@ -13,7 +13,7 @@
 #pragma library player_weapon
 
 
-stock weapon_GetSlot(weaponid)
+stock Weapon_GetSlot(weaponid)
 {
 	switch (weaponid) {
 	    case 0, 1: return 0;

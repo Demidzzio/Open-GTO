@@ -15,9 +15,9 @@
 
 #define MAX_WEAPON_SLOT	13
 
-stock player_GiveWeapon(playerid, weaponid, ammo)
+stock Player_GiveWeapon(playerid, weaponid, ammo)
 {
-	new slot_id = weapon_GetSlot(weaponid)
+	new slot_id = Weapon_GetSlot(weaponid)
 	gPlayer[playerid][WeaponID][slot_id] = weaponid;
 	gPlayer[playerid][WeaponAmmo][slot_id] += ammo;
 	
@@ -25,7 +25,7 @@ stock player_GiveWeapon(playerid, weaponid, ammo)
 	return 1;
 }
 
-stock player_ResetWeapon(playerid)
+stock Player_ResetWeapon(playerid)
 {
 	for (new i = 0; i < MAX_WEAPON_SLOT; i++) {
 		gPlayer[playerid][WeaponID][i] = 0;

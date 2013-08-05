@@ -13,39 +13,39 @@
 #pragma library player
 
 
-static player_start_money = PLAYER_START_MONEY;
+enum Config_Player {
+	c_PlayerStartMoney,
+}
+new gPlayerConf[Config_Player] = {PLAYER_START_MONEY};
 
-stock player_OnGameModeInit()
+stock Player_OnGameModeInit()
 {
-	player_LoadClass();
-	return 1;
+	Player_LoadClass();
 }
 
-stock player_LoadConfig(file_cfg)
+stock Player_LoadConfig(file_cfg)
 {
-	ini_getInteger(file_cfg, "player_start_money", player_start_money);
-	return 1;
+	ini_getInteger(file_cfg, "player_start_money", gPlayerConf[c_PlayerStartMoney]);
 }
 
-stock player_SaveConfig(file_cfg)
+stock Player_SaveConfig(file_cfg)
 {
-	ini_setInteger(file_cfg, "player_start_money", player_start_money);
-	return 1;
+	ini_setInteger(file_cfg, "player_start_money", gPlayerConf[c_PlayerStartMoney]);
 }
 
-stock player_Create(playerid)
+stock Player_Create(playerid)
 {
 	player_SetMoney(playerid, player_start_money);
 	player_Save(playerid);
 	return 1;
 }
 
-stock player_Save(playerid)
+stock Player_Save(playerid)
 {
 	return 1;
 }
 
-stock player_LoadClass()
+stock Player_LoadClass()
 {
 	for(new i = 0; i <= 299; i++) {
 		switch (i) {
@@ -53,9 +53,9 @@ stock player_LoadClass()
 				continue;
 			}
 			default: {
-				AddPlayerClass(i, 0.0, 0.0, 0.0, 0.0, 0, 0, 0, 0, 0, 0);
+				Player_AddClass(i, 0.0, 0.0, 0.0, 0.0, 0, 0, 0, 0, 0, 0);
 			}
 		}
 	}
-	log_Game(_(PLAYER_CLASSES_INIT));
+	Log_Game(_(PLAYER_CLASSES_INIT));
 }

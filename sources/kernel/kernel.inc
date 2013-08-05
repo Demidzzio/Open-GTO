@@ -13,11 +13,11 @@
 #pragma library kernel
 
 
-stock kernel_OnGameModeInit()
+stock Kernel_OnGameModeInit()
 {
-	lang_OnGameModeInit();
-	log_OnGameModeInit();
-	weather_OnGameModeInit();
-	game_OnGameModeInit();
+	Lang_OnGameModeInit();
+	Log_OnGameModeInit();
+	Weather_OnGameModeInit();
+	Game_OnGameModeInit();
 	return 1;
 }

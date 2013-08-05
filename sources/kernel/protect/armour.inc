@@ -15,19 +15,17 @@
 
 new bool:protect_armour_enabled = PROTECT_ARMOUR_ENABLED;
 
-stock armour_LoadConfig(file_cfg)
+stock Armour_LoadConfig(file_cfg)
 {
 	ini_getInteger(file_cfg, "protect_armour_enabled", protect_armour_enabled);
-	return 1;
 }
 
-stock armour_SaveConfig(file_cfg)
+stock Armour_SaveConfig(file_cfg)
 {
 	ini_setInteger(file_cfg, "protect_armour_enabled", protect_armour_enabled);
-	return 1;
 }
 
-stock armour_OnPlayerPickUpPickup(playerid, pickupid)
+stock Armour_OnPlayerPickUpPickup(playerid, pickupid)
 {
 	if (!protect_armour_enabled) {
 		return 0;
@@ -38,17 +36,17 @@ stock armour_OnPlayerPickUpPickup(playerid, pickupid)
 	return 1;
 }
 
-stock armour_Check(playerid)
+stock Armour_Check(playerid)
 {
 	if (!protect_armour_enabled) {
 		return 0;
 	}
-	new Float:serverarmour = player_GetArmour(playerid);
+	new Float:serverarmour = Player_GetArmour(playerid);
 	new Float:clientarmour;
 	GetPlayerArmour(playerid, clientarmour);
 	
 	if (clientarmour > serverarmour) {
-		player_SetArmour(playerid, serverarmour);
+		Player_SetArmour(playerid, serverarmour);
 	} else if (clientarmour < serverarmour) {
 		gPlayer[playerid][Armour] = clientarmour;
 	}

@@ -17,7 +17,7 @@ enum info_Player {
 	Float:Armour,
 	Float:Health,
 	Name[MAX_PLAYER_NAME + 1],
-	IP[MAX_IP],
+	Ip[MAX_IP],
 	Money,
 	BankMoney,
 	WeaponID[MAX_WEAPON_SLOT],
@@ -34,13 +34,13 @@ new gPlayer[MAX_PLAYERS][info_Player];
 
 */
 
-stock Float:player_GetMaxSpeed(playerid)
+stock Float:Player_GetMaxSpeed(playerid)
 {
 	// todo: add checks with animations
 	return 50.0;
 }
 
-stock Float:player_GetSpeed(playerid)
+stock Float:Player_GetSpeed(playerid)
 {
 	new Float:pos[3];
 	GetPlayerVelocity(playerid, pos[0], pos[1], pos[2]);
@@ -53,7 +53,7 @@ stock Float:player_GetSpeed(playerid)
 
 */
 
-stock player_GetOldPos(playerid, &Float:x, &Float:y, &Float:z)
+stock Player_GetOldPos(playerid, &Float:x, &Float:y, &Float:z)
 {
 	x = gPlayer[playerid][OldPos][0];
 	y = gPlayer[playerid][OldPos][1];
@@ -61,7 +61,7 @@ stock player_GetOldPos(playerid, &Float:x, &Float:y, &Float:z)
 	return 1;
 }
 
-stock player_SetOldPos(playerid, Float:x, Float:y, Float:z)
+stock Player_SetOldPos(playerid, Float:x, Float:y, Float:z)
 {
 	gPlayer[playerid][OldPos][0] = x;
 	gPlayer[playerid][OldPos][1] = y;
@@ -69,15 +69,15 @@ stock player_SetOldPos(playerid, Float:x, Float:y, Float:z)
 	return 1;
 }
 
-stock player_GetPos(playerid, &Float:x, &Float:y, &Float:z)
+stock Player_GetPos(playerid, &Float:x, &Float:y, &Float:z)
 {
 	GetPlayerPos(playerid, x, y, z);
 	return 1;
 }
 
-stock player_SetPos(playerid, Float:x, Float:y, Float:z)
+stock Player_SetPos(playerid, Float:x, Float:y, Float:z)
 {
-	player_SetOldPos(playerid, x, y, z);
+	Player_SetOldPos(playerid, x, y, z);
 	SetPlayerPos(playerid, x, y, z);
 	return 1;
 }
@@ -88,12 +88,12 @@ stock player_SetPos(playerid, Float:x, Float:y, Float:z)
 
 */
 
-stock player_GetName(playerid, name[], len = sizeof(name))
+stock Player_GetName(playerid, name[], len = sizeof(name))
 {
 	return GetPlayerName(playerid, name, len);
 }
 
-stock player_SetName(playerid, name[])
+stock Player_SetName(playerid, name[])
 {
 	return SetPlayerName(playerid, name);
 }
@@ -105,7 +105,7 @@ stock player_SetName(playerid, name[])
 
 */
 
-stock player_GetPing(playerid)
+stock Player_GetPing(playerid)
 {
 	new ping = GetPlayerPing(playerid);
 	if (ping == 65535) {
@@ -121,18 +121,18 @@ stock player_GetPing(playerid)
 
 */
 
-stock player_GetScore(playerid)
+stock Player_GetScore(playerid)
 {
 	return gPlayer[playerid][Score];
 }
 
-stock player_SetScore(playerid, score)
+stock Player_SetScore(playerid, score)
 {
 	gPlayer[playerid][Score] = score;
 	SetPlayerScore(playerid, score);
 }
 
-stock player_GiveScore(playerid, score)
+stock Player_GiveScore(playerid, score)
 {
 	gPlayer[playerid][Score] += score;
 	SetPlayerScore(playerid, gPlayer[playerid][Score]);
@@ -144,18 +144,18 @@ stock player_GiveScore(playerid, score)
 
 */
 
-stock player_GetSkillLevel(playerid, skill)
+stock Player_GetSkillLevel(playerid, skill)
 {
 	return gPlayer[playerid][skill];
 }
 
-stock player_SetSkillLevel(playerid, skill, level)
+stock Player_SetSkillLevel(playerid, skill, level)
 {
 	gPlayer[playerid][skill] = level;
 	SetPlayerSkillLevel(playerid, skill, level);
 }
 
-stock player_GiveSkillLevel(playerid, skill)
+stock Player_GiveSkillLevel(playerid, skill)
 {
 	gPlayer[playerid][skill] += skill;
 	SetPlayerSkillLevel(playerid, skill, gPlayer[playerid][skill]);

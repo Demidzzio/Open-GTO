@@ -5,131 +5,131 @@
 	
 */
 
-#include <..\compiler\includes\a_samp>
+#include <../compiler/includes/a_samp>
 
-#include "config\config.h"
+#include "config/config.h"
 
-#include "kernel\config\config.inc"
-#include "kernel\lib\utils"
-#include "kernel\lang\lang"
-#include "kernel\log\log"
-#include "kernel\lib\foreach"
-#include "kernel\lib\mxINI"
+#include "kernel/config/config.inc"
+#include "kernel/lib/utils"
+#include "kernel/lang/lang"
+#include "kernel/log/log"
+#include "kernel/lib/foreach"
+#include "kernel/lib/mxINI"
 
-#include "kernel\streamers\checkpoint"
-#include "kernel\streamers\mapicon"
+#include "kernel/streamers/checkpoint"
+#include "kernel/streamers/mapicon"
 
-#include "kernel\weapon\drop"
-#include "kernel\weapon\skill"
-#include "kernel\weapon\weapon"
+#include "kernel/weapon/drop"
+#include "kernel/weapon/skill"
+#include "kernel/weapon/weapon"
 
-#include "kernel\world\game.inc"
-#include "kernel\world\enterexits"
-#include "kernel\world\weather"
-#include "kernel\world\zones"
+#include "kernel/world/game.inc"
+#include "kernel/world/enterexits"
+#include "kernel/world/weather"
+#include "kernel/world/zones"
 
-#include "kernel\admin\ban"
-#include "kernel\admin\jail"
-#include "kernel\admin\kick"
-#include "kernel\admin\mute"
+#include "kernel/admin/ban"
+#include "kernel/admin/jail"
+#include "kernel/admin/kick"
+#include "kernel/admin/mute"
 
-#include "kernel\player\player.inc"
-#include "kernel\player\armour"
-#include "kernel\player\fightstyle"
-#include "kernel\player\health"
-#include "kernel\player\ip"
-#include "kernel\player\level"
-#include "kernel\player\money"
-#include "kernel\player\payday"
-#include "kernel\player\vehicle"
-#include "kernel\player\vip"
-#include "kernel\player\weapon"
+#include "kernel/player/player.inc"
+#include "kernel/player/armour"
+#include "kernel/player/fightstyle"
+#include "kernel/player/health"
+#include "kernel/player/ip"
+#include "kernel/player/level"
+#include "kernel/player/money"
+#include "kernel/player/payday"
+#include "kernel/player/vehicle"
+#include "kernel/player/vip"
+#include "kernel/player/weapon"
 
-#include "kernel\vehicle\vehicle.inc"
-#include "kernel\vehicle\fuel"
-#include "kernel\vehicle\lock"
-#include "kernel\vehicle\speed"
+#include "kernel/vehicle/vehicle.inc"
+#include "kernel/vehicle/fuel"
+#include "kernel/vehicle/lock"
+#include "kernel/vehicle/speed"
 
-#include "kernel\protect\armour.inc"
-#include "kernel\protect\chat.inc"
-#include "kernel\protect\health.inc"
-#include "kernel\protect\idle.inc"
-#include "kernel\protect\jetpack.inc"
-#include "kernel\protect\money.inc"
-#include "kernel\protect\ping.inc"
-#include "kernel\protect\rconlogin.inc"
-#include "kernel\protect\speed.inc"
-#include "kernel\protect\weapon.inc"
+#include "kernel/protect/armour.inc"
+#include "kernel/protect/chat.inc"
+#include "kernel/protect/health.inc"
+#include "kernel/protect/idle.inc"
+#include "kernel/protect/jetpack.inc"
+#include "kernel/protect/money.inc"
+#include "kernel/protect/ping.inc"
+#include "kernel/protect/rconlogin.inc"
+#include "kernel/protect/speed.inc"
+#include "kernel/protect/weapon.inc"
 
-#include "kernel\quest\quest"
+#include "kernel/quest/quest"
 
-#include "kernel\kernel"
+#include "kernel/kernel"
 
 
-#include "admin\commands"
-#include "admin\menu"
-#include "admin\admin"
+#include "admin/commands"
+#include "admin/menu"
+#include "admin/admin"
 
-#include "gang\commands"
-#include "gang\menu"
-#include "gang\gang"
+#include "gang/commands"
+#include "gang/menu"
+#include "gang/gang"
 
-#include "player\player"
-#include "player\commands"
-#include "player\menu"
+#include "player/player"
+#include "player/commands"
+#include "player/menu"
 
-#include "quest\deathmatch"
-#include "quest\race"
-#include "quest\swagup"
-#include "quest\trucker"
+#include "quest/deathmatch"
+#include "quest/race"
+#include "quest/swagup"
+#include "quest/trucker"
 
-#include "services\bank"
-#include "services\bar"
-#include "services\business"
-#include "services\fastfood"
-#include "services\fightstyle"
-#include "services\housing"
-#include "services\lottery"
-#include "services\skinshop"
-#include "services\vehshop"
-#include "services\weaponshop"
+#include "services/bank"
+#include "services/bar"
+#include "services/business"
+#include "services/fastfood"
+#include "services/fightstyle"
+#include "services/housing"
+#include "services/lottery"
+#include "services/skinshop"
+#include "services/vehshop"
+#include "services/weaponshop"
 
-#include "world\groundhold"
-#include "world\world"
+#include "world/groundhold"
+#include "world/world"
 
-#include "config\config"
+#include "config/config"
 
 
 main() {}
 
 public OnGameModeInit()
 {
-	log_Game("Open-GTO: init...");
+	Log_Game("Open-GTO: init...");
 	// load configure
-	config_OnGameModeInit();
+	Config_OnGameModeInit();
 	
 	// kernel
-	kernel_OnGameModeInit();
+	Kernel_OnGameModeInit();
 	
 	// init gm modules
-	player_OnGameModeInit();
+	Player_OnGameModeInit();
 	
 	// save world
-	config_Save();
+	Config_Save();
 	
-	log_Game(_(GTO_INIT_COMPLETE));
+	Log_Game(_(GAME_MODE_INIT_COMPLETE));
 	return 1;
 }
 
 public OnGameModeExit()
 {
-	log_Game(_(GTO_EXIT));
+	Log_Game(_(GAME_MODE_EXIT));
 	return 1;
 }
 
 public OnPlayerConnect(playerid)
 {
-    if (IsPlayerNPC(playerid)) {
+    if (Player_IsNPC(playerid)) {
 		return 1;
 	}
 	return 1;
@@ -137,7 +137,7 @@ public OnPlayerConnect(playerid)
 
 public OnPlayerDisconnect(playerid, reason)
 {
-	if (IsPlayerNPC(playerid)) {
+	if (Player_IsNPC(playerid)) {
 		return 1;
 	}
 	return 1;
@@ -170,7 +170,7 @@ public OnPlayerEnterRaceCheckpoint(playerid)
 
 public OnPlayerDeath(playerid, killerid, reason)
 {
-	if (IsPlayerNPC(playerid)) {
+	if (Player_IsNPC(playerid)) {
 		return 1;
 	}
 	return 1;
@@ -178,7 +178,7 @@ public OnPlayerDeath(playerid, killerid, reason)
 
 public OnPlayerSpawn(playerid)
 {
-	if (IsPlayerNPC(playerid)) {
+	if (Player_IsNPC(playerid)) {
 		return 1;
 	}
 	return 1;

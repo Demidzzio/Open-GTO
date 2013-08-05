@@ -13,18 +13,18 @@
 #pragma library player_armour
 
 
-stock player_SetArmour(playerid, Float:armour)
+stock Player_SetArmour(playerid, Float:armour)
 {
 	gPlayer[playerid][Armour] = armour;
 	SetPlayerArmour(playerid, armour);
 }
 
-stock Float:player_GetArmour(playerid)
+stock Float:Player_GetArmour(playerid)
 {
 	return gPlayer[playerid][Armour];
 }
 
-stock player_GiveArmour(playerid, Float:armour)
+stock Player_GiveArmour(playerid, Float:armour)
 {
-	player_SetArmour(playerid, player_GetArmour(playerid) + armour);
+	Player_SetArmour(playerid, Player_GetArmour(playerid) + armour);
 }

@@ -13,12 +13,12 @@
 #pragma library player_ip
 
 
-stock player_GetIp(playerid, ip[], maxlength = sizeof(ip))
+stock Player_GetIp(playerid, ip[], maxlength = sizeof(ip))
 {
-	strmid(ip, gPlayer[playerid][IP], 0, maxlength);
+	strmid(ip, gPlayer[playerid][Ip], 0, maxlength);
 }
 
-stock player_SetIp(playerid, ip[MAX_IP])
+stock Player_SetIp(playerid, ip[MAX_IP])
 {
-	gPlayer[playerid][IP] = ip;
+	gPlayer[playerid][Ip] = ip;
 }

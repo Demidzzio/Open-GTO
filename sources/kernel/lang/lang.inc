@@ -16,37 +16,35 @@
 #define MAX_LANG_STRING	(MAX_STRING + 32)
 #define MAX_VAR_STRING	32
 
-#define _(%0) lang_GetText(#%0)
+#define _(%0) Lang_GetText(#%0)
 
-static lang_Use[16] = LANG_USE;
+static g_lang_use[16] = LANG_USE;
 
-stock lang_OnGameModeInit()
+stock Lang_OnGameModeInit()
 {
 	new lang_file[MAX_STRING];
-	format(lang_file, sizeof(lang_file), DATA_FILES_FOLDER "lang/%s"DATA_FILES_FORMAT, lang_Use);
+	format(lang_file, sizeof(lang_file), DATA_FILES_FOLDER "lang/%s"DATA_FILES_FORMAT, g_lang_use);
 	
-	new success = lang_ReadFile(lang_file);
+	new success = Lang_ReadFile(lang_file);
 	if (success) {
-		log_Game("Lang: module init");
+		Log_Game("Lang: module init");
 	} else {
-		log_Error("Lang: error: no such language file '"DATA_FILES_FOLDER "lang/%s"DATA_FILES_FORMAT"'", lang_Use);
+		Log_Error("Lang: error: no such language file '"DATA_FILES_FOLDER "lang/%s"DATA_FILES_FORMAT"'", g_lang_use);
 	}
 	return 1;
 }
 
-stock lang_LoadConfig(file_cfg)
+stock Lang_LoadConfig(file_cfg)
 {
-	ini_getString(file_cfg, "lang_use", lang_Use);
-	return 1;
+	ini_getString(file_cfg, "lang_use", g_lang_use);
 }
 
-stock lang_SaveConfig(file_cfg)
+stock Lang_SaveConfig(file_cfg)
 {
-	ini_setString(file_cfg, "lang_use", lang_Use);
-	return 1;
+	ini_setString(file_cfg, "lang_use", g_lang_use);
 }
 
-stock lang_ReadFile(filename[])
+stock Lang_ReadFile(filename[])
 {
 	new File:flang = fopen(filename, io_read);
 	if (!flang) {
@@ -64,15 +62,15 @@ stock lang_ReadFile(filename[])
 		if (sep_pos != -1) {
 			strmid(varname, string, 0, sep_pos);
 			strmid(string, string, sep_pos + 3, len - 2);
-			lang_FixSpecialChar(string);
-			lang_SetText(varname, string);
+			Lang_FixSpecialChar(string);
+			Lang_SetText(varname, string);
 		}
 	}
 	fclose(flang);
 	return 1;
 }
 
-stock lang_FixSpecialChar(string[MAX_LANG_STRING])
+stock Lang_FixSpecialChar(string[MAX_LANG_STRING])
 {
 	for (new i = 0; string[i] != '\0'; i++) {
 		if (string[i] != '\\') {
@@ -91,14 +89,14 @@ stock lang_FixSpecialChar(string[MAX_LANG_STRING])
 	}
 }
 
-stock lang_SetText(varname[], value[])
+stock Lang_SetText(varname[], value[])
 {
 	if (!isnull(varname)) {
 		setproperty(.value = bernstein(varname), .string = value);
 	}
 }
 
-stock lang_GetText(varname[])
+stock Lang_GetText(varname[])
 {
 	new result[MAX_STRING];
 	if (!isnull(varname)) {
@@ -108,7 +106,7 @@ stock lang_GetText(varname[])
 	return result;
 }
 
-stock lang_DeleteText(varname[])
+stock Lang_DeleteText(varname[])
 {
 	if (!isnull(varname)) {
 		return deleteproperty(.value = bernstein(varname));

@@ -13,18 +13,18 @@
 #pragma library player_health
 
 
-stock player_SetHealth(playerid, Float:health)
+stock Player_SetHealth(playerid, Float:health)
 {
 	gPlayer[playerid][Health] = health;
 	SetPlayerHealth(playerid, health);
 }
 
-stock Float:player_GetHealth(playerid)
+stock Float:Player_GetHealth(playerid)
 {
 	return gPlayer[playerid][Health];
 }
 
-stock player_GiveHealth(playerid, Float:health)
+stock Player_GiveHealth(playerid, Float:health)
 {
-	player_SetHealth(playerid, player_GetHealth(playerid) + health);
+	Player_SetHealth(playerid, Player_GetHealth(playerid) + health);
 }

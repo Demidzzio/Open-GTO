@@ -27,37 +27,37 @@ new log_dir[][] = {
 	DATA_FILES_FOLDER "log/debug/"
 };
 
-static
-	bool:log_game_enabled = LOG_GAME_ENABLED,
-	bool:log_user_enabled = LOG_USER_ENABLED,
-	bool:log_error_enabled = LOG_ERROR_ENABLED,
-	bool:log_debug_enabled = LOG_DEBUG_ENABLED;
+enum Config_Log {
+	c_GameEnabled,
+	c_UserEnabled,
+	c_ErrorEnabled,
+	c_DebugEnabled,
+}
+new gLogConf[Config_Log] = {LOG_GAME_ENABLED, LOG_USER_ENABLED, LOG_ERROR_ENABLED, LOG_DEBUG_ENABLED};
 
 
-stock log_OnGameModeInit()
+stock Log_OnGameModeInit()
 {
-	log_Game(_(LOG_INIT));
+	Log_Game(_(LOG_INIT));
 }
 
-stock log_LoadConfig(file_cfg)
+stock Log_LoadConfig(file_cfg)
 {
-	ini_getInteger(file_cfg, "log_game_enabled", log_game_enabled);
-	ini_getInteger(file_cfg, "log_user_enabled", log_user_enabled);
-	ini_getInteger(file_cfg, "log_error_enabled", log_error_enabled);
-	ini_getInteger(file_cfg, "log_debug_enabled", log_debug_enabled);
-	return 1;
+	ini_getInteger(file_cfg, "log_game_enabled", gLogConf[c_GameEnabled]);
+	ini_getInteger(file_cfg, "log_user_enabled", gLogConf[c_UserEnabled]);
+	ini_getInteger(file_cfg, "log_error_enabled", gLogConf[c_ErrorEnabled]);
+	ini_getInteger(file_cfg, "log_debug_enabled", gLogConf[c_DebugEnabled]);
 }
 
-stock log_SaveConfig(file_cfg)
+stock Log_SaveConfig(file_cfg)
 {
-	ini_setInteger(file_cfg, "log_game_enabled", log_game_enabled);
-	ini_setInteger(file_cfg, "log_user_enabled", log_user_enabled);
-	ini_setInteger(file_cfg, "log_error_enabled", log_error_enabled);
-	ini_setInteger(file_cfg, "log_debug_enabled", log_debug_enabled);
-	return 1;
+	ini_setInteger(file_cfg, "log_game_enabled", gLogConf[c_GameEnabled]);
+	ini_setInteger(file_cfg, "log_user_enabled", gLogConf[c_UserEnabled]);
+	ini_setInteger(file_cfg, "log_error_enabled", gLogConf[c_ErrorEnabled]);
+	ini_setInteger(file_cfg, "log_debug_enabled", gLogConf[c_DebugEnabled]);
 }
 
-stock log_Write(log, string[])
+stock Log_Write(log, string[])
 {
 	// get log file path
 	new file_path[MAX_STRING], y, m, d;
@@ -87,9 +87,9 @@ stock log_Write(log, string[])
 
 #define BYTES_PER_CELL			4
 
-stock log_Game(fstring[], {Float, _}:...)
+stock Log_Game(fstring[], {Float, _}:...)
 {
-	if (!log_game_enabled) {
+	if (!gLogConf[c_GameEnabled]) {
 		return 0;
 	}
 	
@@ -129,19 +129,19 @@ stock log_Game(fstring[], {Float, _}:...)
 	#if defined LOG_PRINTING
 		printf(message);
 	#endif
-		log_Write(LOG_Game, message);
+		Log_Write(LOG_Game, message);
 	} else {
 	#if defined LOG_PRINTING
 		printf(fstring);
 	#endif
-		log_Write(LOG_Game, fstring);
+		Log_Write(LOG_Game, fstring);
 	}
 	return 1;
 }
 
-stock log_User(fstring[], {Float, _}:...)
+stock Log_User(fstring[], {Float, _}:...)
 {
-	if (!log_user_enabled) {
+	if (!gLogConf[c_UserEnabled]) {
 		return 0;
 	}
 	
@@ -181,19 +181,19 @@ stock log_User(fstring[], {Float, _}:...)
 	#if defined LOG_PRINTING
 		printf(message);
 	#endif
-		log_Write(LOG_User, message);
+		Log_Write(LOG_User, message);
 	} else {
 	#if defined LOG_PRINTING
 		printf(fstring);
 	#endif
-		log_Write(LOG_User, fstring);
+		Log_Write(LOG_User, fstring);
 	}
 	return 1;
 }
 
-stock log_Error(fstring[], {Float, _}:...)
+stock Log_Error(fstring[], {Float, _}:...)
 {
-	if (!log_error_enabled) {
+	if (!gLogConf[c_ErrorEnabled]) {
 		return 0;
 	}
 	
@@ -233,25 +233,25 @@ stock log_Error(fstring[], {Float, _}:...)
 	#if defined LOG_PRINTING
 		printf(message);
 	#endif
-		log_Write(LOG_Error, message);
-		if (log_game_enabled) {
-			log_Write(LOG_Game, message);
+		Log_Write(LOG_Error, message);
+		if (gLogConf[c_GameEnabled]) {
+			Log_Write(LOG_Game, message);
 		}
 	} else {
 	#if defined LOG_PRINTING
 		printf(fstring);
 	#endif
-		log_Write(LOG_Error, fstring);
-		if (log_game_enabled) {
-			log_Write(LOG_Game, fstring);
+		Log_Write(LOG_Error, fstring);
+		if (gLogConf[c_GameEnabled]) {
+			Log_Write(LOG_Game, fstring);
 		}
 	}
 	return 1;
 }
 
-stock log_Debug(fstring[], {Float, _}:...)
+stock Log_Debug(fstring[], {Float, _}:...)
 {
-	if (!log_debug_enabled) {
+	if (!gLogConf[c_DebugEnabled]) {
 		return 0;
 	}
 	
@@ -291,12 +291,12 @@ stock log_Debug(fstring[], {Float, _}:...)
 	#if defined LOG_PRINTING
 		printf(message);
 	#endif
-		log_Write(LOG_Debug, message);
+		Log_Write(LOG_Debug, message);
 	} else {
 	#if defined LOG_PRINTING
 		printf(fstring);
 	#endif
-		log_Write(LOG_Debug, fstring);
+		Log_Write(LOG_Debug, fstring);
 	}
 	return 1;
 }

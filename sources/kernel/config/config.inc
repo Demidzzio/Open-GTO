@@ -27,40 +27,40 @@
 #define SHOW_PLAYER_MARKERS_MODE	PLAYER_MARKERS_MODE_GLOBAL
 
 
-stock kernel_LoadConfig(file_cfg)
+stock Kernel_LoadConfig(file_cfg)
 {
-	game_LoadConfig(file_cfg);
-	log_LoadConfig(file_cfg);
-	lang_LoadConfig(file_cfg);
-	weather_LoadConfig(file_cfg);
+	Game_LoadConfig(file_cfg);
+	Log_LoadConfig(file_cfg);
+	Lang_LoadConfig(file_cfg);
+	Weather_LoadConfig(file_cfg);
 	// protection
-	money_LoadConfig(file_cfg);
-	armour_LoadConfig(file_cfg);
-	health_LoadConfig(file_cfg);
-	rconlogin_LoadConfig(file_cfg);
-	jetpack_LoadConfig(file_cfg);
-	chat_LoadConfig(file_cfg);
-	idle_LoadConfig(file_cfg);
-	weapon_LoadConfig(file_cfg);
-	speed_LoadConfig(file_cfg);
+	Money_LoadConfig(file_cfg);
+	Armour_LoadConfig(file_cfg);
+	Health_LoadConfig(file_cfg);
+	Rconlogin_LoadConfig(file_cfg);
+	Jetpack_LoadConfig(file_cfg);
+	Chat_LoadConfig(file_cfg);
+	Idle_LoadConfig(file_cfg);
+	Weapon_LoadConfig(file_cfg);
+	Speed_LoadConfig(file_cfg);
 	return 1;
 }
 
-stock kernel_SaveConfig(file_cfg)
+stock Kernel_SaveConfig(file_cfg)
 {
-	game_SaveConfig(file_cfg);
-	log_SaveConfig(file_cfg);
-	lang_SaveConfig(file_cfg);
-	weather_SaveConfig(file_cfg);
+	Game_SaveConfig(file_cfg);
+	Log_SaveConfig(file_cfg);
+	Lang_SaveConfig(file_cfg);
+	Weather_SaveConfig(file_cfg);
 	// protection
-	money_SaveConfig(file_cfg);
-	armour_SaveConfig(file_cfg);
-	health_SaveConfig(file_cfg);
-	rconlogin_SaveConfig(file_cfg);
-	jetpack_SaveConfig(file_cfg);
-	chat_SaveConfig(file_cfg);
-	idle_SaveConfig(file_cfg);
-	weapon_SaveConfig(file_cfg);
-	speed_SaveConfig(file_cfg);
+	Money_SaveConfig(file_cfg);
+	Armour_SaveConfig(file_cfg);
+	Health_SaveConfig(file_cfg);
+	Rconlogin_SaveConfig(file_cfg);
+	Jetpack_SaveConfig(file_cfg);
+	Chat_SaveConfig(file_cfg);
+	Idle_SaveConfig(file_cfg);
+	Weapon_SaveConfig(file_cfg);
+	Speed_SaveConfig(file_cfg);
 	return 1;
 }

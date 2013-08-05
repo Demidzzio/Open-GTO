@@ -15,28 +15,26 @@
 
 new bool:protect_money_enabled = PROTECT_MONEY_ENABLED;
 
-stock money_LoadConfig(file_cfg)
+stock Money_LoadConfig(file_cfg)
 {
 	ini_getInteger(file_cfg, "protect_money_enabled", protect_money_enabled);
-	return 1;
 }
 
-stock money_SaveConfig(file_cfg)
+stock Money_SaveConfig(file_cfg)
 {
 	ini_setInteger(file_cfg, "protect_money_enabled", protect_money_enabled);
-	return 1;
 }
 
-stock money_Check(playerid)
+stock Money_Check(playerid)
 {
 	if (!protect_money_enabled) {
 		return 0;
 	}
+	new servermoney = Player_GetMoney(playerid);
 	new clientmoney = GetPlayerMoney(playerid);
-	new servermoney = player_GetMoney(playerid);
 	
 	if (clientmoney > servermoney) {
-		player_SetMoney(playerid, servermoney);
+		Player_SetMoney(playerid, servermoney);
 	} else if (clientmoney < servermoney) {
 		gPlayer[playerid][Money] = clientmoney;
 	}

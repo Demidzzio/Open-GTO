@@ -15,38 +15,36 @@
 
 new bool:protect_speed_enabled = PROTECT_SPEED_ENABLED;
 
-stock speed_LoadConfig(file_cfg)
+stock Speed_LoadConfig(file_cfg)
 {
 	ini_getInteger(file_cfg, "protect_speed_enabled", protect_speed_enabled);
-	return 1;
 }
 
-stock speed_SaveConfig(file_cfg)
+stock Speed_SaveConfig(file_cfg)
 {
 	ini_setInteger(file_cfg, "protect_speed_enabled", protect_speed_enabled);
-	return 1;
 }
 
-stock speed_Check(playerid)
+stock Speed_Check(playerid)
 {
 	if (!protect_speed_enabled) {
 		return 0;
 	}
 	
-	new playerState = GetPlayerState(playerid);
-	if (playerState == PLAYER_STATE_ONFOOT) {
-		new Float:playerSpeed = player_GetSpeed(playerid);
-		new Float:playerMaxSpeed = player_GetMaxSpeed(playerid);
+	new player_state = Player_GetState(playerid);
+	if (player_state == PLAYER_STATE_ONFOOT) {
+		new Float:player_speed = Player_GetSpeed(playerid);
+		new Float:player_max_speed = Player_GetMaxSpeed(playerid);
 		
-		if (playerSpeed > playerMaxSpeed) {
-			player_Kick(playerid, _(SPEED_PLAYER_HACK));
+		if (player_speed > player_max_speed) {
+			Player_Kick(playerid, _(SPEED_PLAYER_HACK));
 		}
-	} else if (playerState == PLAYER_STATE_DRIVER) {
-		new Float:vehicleSpeed = vehicle_GetSpeed(playerid);
-		new Float:vehicleMaxSpeed = vehicle_GetMaxSpeed(playerid);
+	} else if (player_state == PLAYER_STATE_DRIVER) {
+		new Float:vehicle_speed = Vehicle_GetSpeed(playerid);
+		new Float:vehicle_max_Speed = Vehicle_GetMaxSpeed(playerid);
 		
-		if (vehicleSpeed > vehicleMaxSpeed) {
-			player_Kick(playerid, _(SPEED_VEHICLE_HACK));
+		if (vehicle_speed > vehicle_max_Speed) {
+			Player_Kick(playerid, _(SPEED_VEHICLE_HACK));
 		}
 	}
 	return 1;
