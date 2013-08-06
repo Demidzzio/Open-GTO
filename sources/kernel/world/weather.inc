@@ -19,6 +19,7 @@ static weather_update_time = WEATHER_UPDATE_TIME;
 
 stock Weather_OnGameModeInit()
 {
+	// todo: set default weather
 	Log_Game(_(WEATHER_INIT));
 }
 

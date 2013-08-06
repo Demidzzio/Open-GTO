@@ -13,30 +13,18 @@
 #pragma library money
 
 
-new bool:protect_money_enabled = PROTECT_MONEY_ENABLED;
-
-stock Money_LoadConfig(file_cfg)
-{
-	ini_getInteger(file_cfg, "protect_money_enabled", protect_money_enabled);
-}
-
-stock Money_SaveConfig(file_cfg)
-{
-	ini_setInteger(file_cfg, "protect_money_enabled", protect_money_enabled);
-}
-
 stock Money_Check(playerid)
 {
-	if (!protect_money_enabled) {
+	if (!gProtectConf[c_Money]) {
 		return 0;
 	}
-	new servermoney = Player_GetMoney(playerid);
-	new clientmoney = GetPlayerMoney(playerid);
+	new server_money = Player_GetMoney(playerid);
+	new client_money = GetPlayerMoney(playerid);
 	
-	if (clientmoney > servermoney) {
-		Player_SetMoney(playerid, servermoney);
-	} else if (clientmoney < servermoney) {
-		gPlayer[playerid][Money] = clientmoney;
+	if (client_money > server_money) {
+		Player_SetMoney(playerid, server_money);
+	} else if (client_money < server_money) {
+		gPlayer[playerid][p_Money] = client_money;
 	}
 	return 1;
 }

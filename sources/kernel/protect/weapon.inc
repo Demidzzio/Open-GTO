@@ -13,21 +13,9 @@
 #pragma library pweapon
 
 
-new bool:protect_weapon_enabled = PROTECT_WEAPON_ENABLED;
-
-stock Weapon_LoadConfig(file_cfg)
-{
-	ini_getInteger(file_cfg, "protect_weapon_enabled", protect_weapon_enabled);
-}
-
-stock Weapon_SaveConfig(file_cfg)
-{
-	ini_setInteger(file_cfg, "protect_weapon_enabled", protect_weapon_enabled);
-}
-
 stock Weapon_OnPlayerPickUpPickup(playerid, pickupid)
 {
-	if (!protect_weapon_enabled) {
+	if (!gProtectConf[c_Weapon]) {
 		return 0;
 	}
 	
@@ -50,7 +38,7 @@ stock Weapon_OnPlayerPickUpPickup(playerid, pickupid)
 
 stock Weapon_OnPlayerExitVehicle(playerid, vehicleid)
 {
-	if (!protect_weapon_enabled) {
+	if (!gProtectConf[c_Weapon]) {
 		return 0;
 	}
 	
@@ -66,7 +54,7 @@ stock Weapon_OnPlayerExitVehicle(playerid, vehicleid)
 
 stock Weapon_Check(playerid)
 {
-	if (!protect_weapon_enabled) {
+	if (!gProtectConf[c_Weapon]) {
 		return 0;
 	}
 	
@@ -74,14 +62,13 @@ stock Weapon_Check(playerid)
 	for (new i = 0; i < MAX_WEAPON_SLOT; i++) {
 		GetPlayerWeaponData(playerid, i, weapon_id, weapon_ammo);
 		
-		if (weapon_id != 0 && (weapon_id != gPlayer[playerid][WeaponID][i] || weapon_ammo > gPlayer[playerid][WeaponAmmo][i])) {
+		if (weapon_id != 0 && (weapon_id != gPlayer[playerid][p_WeaponID][i] || weapon_ammo > gPlayer[playerid][p_WeaponAmmo][i])) {
 			Player_Kick(playerid, _(WEAPON_HACK));
 			return 1;
 		}
 		
-		gPlayer[playerid][WeaponID][i] = weapon_id;
-		gPlayer[playerid][WeaponAmmo][i] = (weapon_id == 0) ? 0 : weapon_ammo;
+		gPlayer[playerid][p_WeaponID][i] = weapon_id;
+		gPlayer[playerid][p_WeaponAmmo][i] = (weapon_id == 0) ? 0 : weapon_ammo;
 	}
 	return 0;
 }
-

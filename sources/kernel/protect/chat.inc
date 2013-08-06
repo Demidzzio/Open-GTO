@@ -26,13 +26,11 @@
 	Adaptation for Open-GTO by ziggi
 */
 
-new bool:protect_chat_enabled = PROTECT_CHAT_ENABLED;
-
 /*
-chatguard_OnGameModeInit();
-chatguard_OnPlayerConnect(playerid);
-chatguard_OnPlayerDisconnect(playerid,reason);
-chatguard_OnPlayerText(playerid,text);
+chat_OnGameModeInit();
+chat_OnPlayerConnect(playerid);
+chat_OnPlayerDisconnect(playerid,reason);
+chat_OnPlayerText(playerid,text);
 
 */
 
@@ -514,20 +512,9 @@ stock tooManyUpperChars ( string[] )
 
 
 
-stock Chat_LoadConfig(file_cfg)
-{
-	ini_getInteger(file_cfg, "protect_chat_enabled", protect_chat_enabled);
-}
-
-stock Chat_SaveConfig(file_cfg)
-{
-	ini_setInteger(file_cfg, "protect_chat_enabled", protect_chat_enabled);
-}
-
-
 stock Chat_OnGameModeInit()
 {
-	if (!protect_chat_enabled) {
+	if (!gProtectConf[c_Chat]) {
 		return;
 	}
     for ( new i; i < CHAT_HISTORY_SIZE; i++ ) {
@@ -539,7 +526,7 @@ stock Chat_OnGameModeInit()
 
 stock Chat_OnPlayerConnect ( playerid )
 {
-	if (!protect_chat_enabled) {
+	if (!gProtectConf[c_Chat]) {
 		return 0;
 	}
     forbiddenName{playerid} = 0;
@@ -563,7 +550,7 @@ stock Chat_OnPlayerDisconnect ( playerid, reason )
 
 stock Chat_OnPlayerText ( playerid, text[] )
 {
-	if (!protect_chat_enabled || IsPlayerAdm(playerid)) {
+	if (!gProtectConf[c_Chat] || IsPlayerAdm(playerid)) {
 		return 1;
 	}
     new msgTick = GetTickCount();

@@ -5,29 +5,17 @@
 
 */
 
-#if defined _health_included
+#if defined _protect_health_included
 	#endinput
 #endif
 
-#define _health_included
-#pragma library health
+#define _protect_health_included
+#pragma library protect_health
 
-
-new bool:protect_health_enabled = PROTECT_HEALTH_ENABLED;
-
-stock Health_LoadConfig(file_cfg)
-{
-	ini_getInteger(file_cfg, "protect_health_enabled", protect_health_enabled);
-}
-
-stock Health_SaveConfig(file_cfg)
-{
-	ini_setInteger(file_cfg, "protect_health_enabled", protect_health_enabled);
-}
 
 stock Health_OnPlayerPickUpPickup(playerid, pickupid)
 {
-	if (!protect_health_enabled) {
+	if (!gProtectConf[c_Health]) {
 		return 0;
 	}
 	if (GetPickupModel(pickupid) == 1242) {
@@ -38,17 +26,17 @@ stock Health_OnPlayerPickUpPickup(playerid, pickupid)
 
 stock Health_Check(playerid)
 {
-	if (!protect_health_enabled) {
+	if (!gProtectConf[c_Health]) {
 		return 0;
 	}
-	new Float:serverhealth = Player_GetHealth(playerid);
-	new Float:clienthealth;
-	GetPlayerHealth(playerid, clienthealth);
+	new Float:server_health = Player_GetHealth(playerid);
+	new Float:client_health;
+	GetPlayerHealth(playerid, client_health);
 	
-	if (clienthealth > serverhealth) {
-		Player_SetHealth(playerid, serverhealth);
-	} else if (clienthealth < serverhealth) {
-		gPlayer[playerid][Health] = clienthealth;
+	if (client_health > server_health) {
+		Player_SetHealth(playerid, server_health);
+	} else if (client_health < server_health) {
+		gPlayer[playerid][p_Health] = client_health;
 	}
 	return 1;
 }

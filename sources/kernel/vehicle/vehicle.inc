@@ -10,18 +10,18 @@
 #endif
 
 #define _Vehicle_included
-#pragma library vehicle
+#pragma library Vehicle
 
 
 #define MAX_VEHICLE_COMPONENTS	14
 #define MAX_VEHICLE_NAME		32
 
-enum info_VehicleModel {
-	Name[MAX_VEHICLE_NAME],
-	MaxSpeed
+enum Info_VehicleModel {
+	vm_Name[MAX_VEHICLE_NAME],
+	vm_MaxSpeed
 }
 
-new gVehicleModel[][info_VehicleModel] = {
+new gVehicleModel[][Info_VehicleModel] = {
 	{"Landstalker", 160},
 	{"Bravura", 160},
 	{"Buffalo", 200},
@@ -237,26 +237,26 @@ new gVehicleModel[][info_VehicleModel] = {
 };
 
 
-enum info_Vehicle {
-	Model,
-	Float:SpawnPos[4],
-	Float:OldPos[3],
-	Color[2],
-	Paintjobid,
-	VirtualWorld,
-	Interior,
-	Float:Health,
-	Component[MAX_VEHICLE_COMPONENTS],
-	bool:Objective,
-	bool:Doorslocked,
+enum Info_Vehicle {
+	v_Model,
+	Float:v_SpawnPos[4],
+	Float:v_OldPos[3],
+	v_Color[2],
+	v_Paintjobid,
+	v_VirtualWorld,
+	v_Interior,
+	Float:v_Health,
+	v_Component[MAX_VEHICLE_COMPONENTS],
+	bool:v_Objective,
+	bool:v_Doorslocked,
 }
 
-new gVehicle[MAX_VEHICLES][info_Vehicle];
+new gVehicle[MAX_VEHICLES][Info_Vehicle];
 
 
 stock Vehicle_OnVehicleStreamIn(vehicleid, forplayerid)
 {
-	SetVehicleParamsForPlayer(vehicleid, forplayerid, gVehicle[vehicleid][Objective], gVehicle[vehicleid][Doorslocked]);
+	SetVehicleParamsForPlayer(vehicleid, forplayerid, gVehicle[vehicleid][v_Objective], gVehicle[vehicleid][v_DoorsLocked]);
 }
 
 /*
@@ -265,12 +265,12 @@ stock Vehicle_OnVehicleStreamIn(vehicleid, forplayerid)
 
 stock Vehicle_SetName(model, name[MAX_VEHICLE_NAME])
 {
-	gVehicleModel[model - 400][Name] = name;
+	gVehicleModel[model - 400][vm_Name] = name;
 }
 
 stock Vehicle_GetName(model, name[], maxlength = sizeof(name))
 {
-	strmid(name, gVehicleModel[model - 400][Name], 0, maxlength);
+	strmid(name, gVehicleModel[model - 400][vm_Name], 0, maxlength);
 }
 
 /*
@@ -279,12 +279,12 @@ stock Vehicle_GetName(model, name[], maxlength = sizeof(name))
 
 stock Vehicle_SetMaxSpeed(model, speed)
 {
-	gVehicleModel[model - 400][MaxSpeed] = speed;
+	gVehicleModel[model - 400][vm_MaxSpeed] = speed;
 }
 
 stock Vehicle_GetMaxSpeed(model)
 {
-	return gVehicleModel[model - 400][MaxSpeed];
+	return gVehicleModel[model - 400][vm_MaxSpeed];
 }
 
 /*
@@ -327,8 +327,8 @@ stock Vehicle_GetSpeed(vehicleid)
 
 stock Float:Vehicle_GetPrevDist(vehicleid)
 {
-    new Float:dist = GetVehicleDistanceFromPoint(vehicleid, gVehicle[vehicleid][OldPos][0], gVehicle[vehicleid][OldPos][1], gVehicle[vehicleid][OldPos][2]);
-    GetVehiclePos(vehicleid, gVehicle[vehicleid][OldPos][0], gVehicle[vehicleid][OldPos][1], gVehicle[vehicleid][OldPos][2]);
+    new Float:dist = GetVehicleDistanceFromPoint(vehicleid, gVehicle[vehicleid][v_OldPos][0], gVehicle[vehicleid][v_OldPos][1], gVehicle[vehicleid][v_OldPos][2]);
+    GetVehiclePos(vehicleid, gVehicle[vehicleid][v_OldPos][0], gVehicle[vehicleid][v_OldPos][1], gVehicle[vehicleid][v_OldPos][2]);
     return dist;
 }
 
@@ -344,16 +344,16 @@ stock Vehicle_Create(modelid, Float:x, Float:y, Float:z, Float:angle, color1, co
 	if (id == INVALID_VEHICLE_ID) {
 		return INVALID_VEHICLE_ID;
 	}
-	gVehicle[id][Model] = modelid;
-	gVehicle[id][SpawnPos][0] = x;
-	gVehicle[id][SpawnPos][1] = y;
-	gVehicle[id][SpawnPos][2] = z;
-	gVehicle[id][SpawnPos][3] = angle;
-	gVehicle[id][OldPos][0] = x;
-	gVehicle[id][OldPos][1] = y;
-	gVehicle[id][OldPos][2] = z;
-	gVehicle[id][Color][0] = color1;
-	gVehicle[id][Color][1] = color2;
+	gVehicle[id][v_Model] = modelid;
+	gVehicle[id][v_SpawnPos][0] = x;
+	gVehicle[id][v_SpawnPos][1] = y;
+	gVehicle[id][v_SpawnPos][2] = z;
+	gVehicle[id][v_SpawnPos][3] = angle;
+	gVehicle[id][v_OldPos][0] = x;
+	gVehicle[id][v_OldPos][1] = y;
+	gVehicle[id][v_OldPos][2] = z;
+	gVehicle[id][v_Color][0] = color1;
+	gVehicle[id][v_Color][1] = color2;
 	Vehicle_ChangePaintjob(id, paintjobid);
 	Vehicle_SetVirtualWorld(id, virtualworld);
 	Vehicle_SetInterior(id, interior);
@@ -368,19 +368,19 @@ stock Vehicle_Create(modelid, Float:x, Float:y, Float:z, Float:angle, color1, co
 
 stock Vehicle_Destroy(vehicleid)
 {
-	gVehicle[vehicleid][Model] = 0;
-	gVehicle[vehicleid][SpawnPos][0] = 0.0;
-	gVehicle[vehicleid][SpawnPos][1] = 0.0;
-	gVehicle[vehicleid][SpawnPos][2] = 0.0;
-	gVehicle[vehicleid][SpawnPos][3] = 0.0;
-	gVehicle[vehicleid][OldPos][0] = 0.0;
-	gVehicle[vehicleid][OldPos][1] = 0.0;
-	gVehicle[vehicleid][OldPos][2] = 0.0;
-	gVehicle[vehicleid][Color][0] = 0;
-	gVehicle[vehicleid][Color][1] = 0;
-	gVehicle[vehicleid][Paintjobid] = 0;
-	gVehicle[vehicleid][VirtualWorld] = 0;
-	gVehicle[vehicleid][Health] = 0.0;
+	gVehicle[vehicleid][v_Model] = 0;
+	gVehicle[vehicleid][v_SpawnPos][0] = 0.0;
+	gVehicle[vehicleid][v_SpawnPos][1] = 0.0;
+	gVehicle[vehicleid][v_SpawnPos][2] = 0.0;
+	gVehicle[vehicleid][v_SpawnPos][3] = 0.0;
+	gVehicle[vehicleid][v_OldPos][0] = 0.0;
+	gVehicle[vehicleid][v_OldPos][1] = 0.0;
+	gVehicle[vehicleid][v_OldPos][2] = 0.0;
+	gVehicle[vehicleid][v_Color][0] = 0;
+	gVehicle[vehicleid][v_Color][1] = 0;
+	gVehicle[vehicleid][v_Paintjobid] = 0;
+	gVehicle[vehicleid][v_VirtualWorld] = 0;
+	gVehicle[vehicleid][v_Health] = 0.0;
 	return DestroyVehicle(vehicleid);
 }
 
@@ -392,14 +392,14 @@ stock Vehicle_SetPos(vehicleid, Float:x, Float:y, Float:z)
 {
 	foreach (new playerid : Player) {
 		if (GetPlayerVehicleID(playerid) == vehicleid) {
-			gPlayer[playerid][OldPos][0] = x;
-			gPlayer[playerid][OldPos][1] = y;
-			gPlayer[playerid][OldPos][2] = z;
+			gPlayer[playerid][v_OldPos][0] = x;
+			gPlayer[playerid][v_OldPos][1] = y;
+			gPlayer[playerid][v_OldPos][2] = z;
 		}
 	}
-	gVehicle[vehicleid][OldPos][0] = x;
-	gVehicle[vehicleid][OldPos][1] = y;
-	gVehicle[vehicleid][OldPos][2] = z;
+	gVehicle[vehicleid][v_OldPos][0] = x;
+	gVehicle[vehicleid][v_OldPos][1] = y;
+	gVehicle[vehicleid][v_OldPos][2] = z;
 	
 	return SetVehiclePos(vehicleid, x, y, z);
 }
@@ -431,16 +431,16 @@ stock Float:Vehicle_GetZAngle(vehicleid)
 
 stock Vehicle_ChangeColor(vehicleid, color1, color2)
 {
-	gVehicle[vehicleid][Color][0] = color1;
-	gVehicle[vehicleid][Color][1] = color2;
+	gVehicle[vehicleid][v_Color][0] = color1;
+	gVehicle[vehicleid][v_Color][1] = color2;
 	
 	return ChangeVehicleColor(vehicleid, color1, color2);
 }
 
 stock Vehicle_GetColor(vehicleid, &color1, &color2)
 {
-	color1 = gVehicle[vehicleid][Color][0];
-	color2 = gVehicle[vehicleid][Color][1];
+	color1 = gVehicle[vehicleid][v_Color][0];
+	color2 = gVehicle[vehicleid][v_Color][1];
 	return 1;
 }
 
@@ -450,13 +450,13 @@ stock Vehicle_GetColor(vehicleid, &color1, &color2)
 
 stock Vehicle_ChangePaintjob(vehicleid, paintjobid)
 {
-	gVehicle[vehicleid][Paintjobid] = paintjobid;
+	gVehicle[vehicleid][v_Paintjobid] = paintjobid;
 	return ChangeVehiclePaintjob(vehicleid, paintjobid);
 }
 
 stock Vehicle_GetPaintjob(vehicleid)
 {
-	return gVehicle[vehicleid][Paintjobid];
+	return gVehicle[vehicleid][v_Paintjobid];
 }
 
 /*
@@ -465,16 +465,16 @@ stock Vehicle_GetPaintjob(vehicleid)
 
 stock Vehicle_SetVirtualWorld(vehicleid, virtualworld)
 {
-	gVehicle[vehicleid][VirtualWorld] = virtualworld;
+	gVehicle[vehicleid][v_VirtualWorld] = virtualworld;
 	return SetVehicleVirtualWorld(vehicleid, virtualworld);
 }
 
 stock Vehicle_GetVirtualWorld(vehicleid)
 {
-	if (gVehicle[vehicleid][VirtualWorld] != GetVehicleVirtualWorld(vehicleid)) {
+	if (gVehicle[vehicleid][v_VirtualWorld] != GetVehicleVirtualWorld(vehicleid)) {
 		// todo: cheat??
 	}
-	return gVehicle[vehicleid][VirtualWorld];
+	return gVehicle[vehicleid][v_VirtualWorld];
 }
 
 /*
@@ -483,7 +483,7 @@ stock Vehicle_GetVirtualWorld(vehicleid)
 
 stock Vehicle_SetHealth(vehicleid, Float:health)
 {
-	gVehicle[vehicleid][Health] = health;
+	gVehicle[vehicleid][v_Health] = health;
 	return SetVehicleHealth(vehicleid, health);
 }
 
@@ -491,15 +491,15 @@ stock Float:Vehicle_GetHealth(vehicleid)
 {
 	new Float:oldHealth;
 	GetVehicleHealth(vehicleid, oldHealth);
-	if (gVehicle[vehicleid][Health] < oldHealth) {
+	if (gVehicle[vehicleid][v_Health] < oldHealth) {
 		// todo: cheat??
 	}
-	return gVehicle[vehicleid][Health];
+	return gVehicle[vehicleid][v_Health];
 }
 
 stock Vehicle_Repair(vehicleid)
 {
-	gVehicle[vehicleid][Health] = 1000.0;
+	gVehicle[vehicleid][v_Health] = 1000.0;
 	return RepairVehicle(vehicleid);
 }
 
@@ -509,16 +509,16 @@ stock Vehicle_Repair(vehicleid)
 
 stock Vehicle_SetSpawnPos(vehicleid, Float:x, Float:y, Float:z)
 {
-	gVehicle[vehicleid][SpawnPos][0] = x;
-	gVehicle[vehicleid][SpawnPos][1] = y;
-	gVehicle[vehicleid][SpawnPos][2] = z;
+	gVehicle[vehicleid][v_SpawnPos][0] = x;
+	gVehicle[vehicleid][v_SpawnPos][1] = y;
+	gVehicle[vehicleid][v_SpawnPos][2] = z;
 }
 
 stock Vehicle_GetSpawnPos(vehicleid, &Float:x, &Float:y, &Float:z)
 {
-	x = gVehicle[vehicleid][SpawnPos][0];
-	y = gVehicle[vehicleid][SpawnPos][1];
-	z = gVehicle[vehicleid][SpawnPos][2];
+	x = gVehicle[vehicleid][v_SpawnPos][0];
+	y = gVehicle[vehicleid][v_SpawnPos][1];
+	z = gVehicle[vehicleid][v_SpawnPos][2];
 }
 
 /*
@@ -527,12 +527,12 @@ stock Vehicle_GetSpawnPos(vehicleid, &Float:x, &Float:y, &Float:z)
 
 stock Vehicle_SetSpawnZAngle(vehicleid, Float:angle)
 {
-	gVehicle[vehicleid][SpawnPos][3] = angle;
+	gVehicle[vehicleid][v_SpawnPos][3] = angle;
 }
 
 stock Float:Vehicle_GetSpawnZAngle(vehicleid)
 {
-	return gVehicle[vehicleid][SpawnPos][3];
+	return gVehicle[vehicleid][v_SpawnPos][3];
 }
 
 /*
@@ -542,8 +542,8 @@ stock Float:Vehicle_GetSpawnZAngle(vehicleid)
 stock Vehicle_Respawn(vehicleid)
 {
 	SetVehicleToRespawn(vehicleid);
-	Vehicle_SetPos(vehicleid, gVehicle[vehicleid][SpawnPos][0], gVehicle[vehicleid][SpawnPos][1], gVehicle[vehicleid][SpawnPos][2]);
-	Vehicle_SetZAngle(vehicleid, gVehicle[vehicleid][SpawnPos][3]);
+	Vehicle_SetPos(vehicleid, gVehicle[vehicleid][v_SpawnPos][0], gVehicle[vehicleid][v_SpawnPos][1], gVehicle[vehicleid][v_SpawnPos][2]);
+	Vehicle_SetZAngle(vehicleid, gVehicle[vehicleid][v_SpawnPos][3]);
 }
 
 /*
@@ -552,13 +552,13 @@ stock Vehicle_Respawn(vehicleid)
 
 stock Vehicle_SetInterior(vehicleid, interiorid)
 {
-	gVehicle[vehicleid][Interior] = interiorid;
+	gVehicle[vehicleid][v_Interior] = interiorid;
 	return LinkVehicleToInterior(vehicleid, interiorid);
 }
 
 stock Vehicle_GetInterior(vehicleid)
 {
-	return gVehicle[vehicleid][Interior];
+	return gVehicle[vehicleid][v_Interior];
 }
 
 /*
@@ -577,7 +577,7 @@ stock Vehicle_GetTrailer(vehicleid)
 stock Vehicle_AddComponent(vehicleid, componentid)
 {
 	new slot = GetVehicleComponentType(componentid);
-	gVehicle[vehicleid][Component][slot] = componentid;
+	gVehicle[vehicleid][v_Component][slot] = componentid;
 	return AddVehicleComponent(vehicleid, componentid);
 }
 
@@ -590,22 +590,22 @@ stock Vehicle_AddComponentArray(vehicleid, components[])
 
 stock Vehicle_GetComponentInSlot(vehicleid, slot)
 {
-	if (gVehicle[vehicleid][Component][slot] != GetVehicleComponentInSlot(vehicleid, slot)) {
+	if (gVehicle[vehicleid][v_Component][slot] != GetVehicleComponentInSlot(vehicleid, slot)) {
 		// todo: cheat??
 	}
-	return gVehicle[vehicleid][Component][slot];
+	return gVehicle[vehicleid][v_Component][slot];
 }
 
 stock Vehicle_RemoveComponent(vehicleid, componentid)
 {
 	new slot = GetVehicleComponentType(componentid);
-	gVehicle[vehicleid][Component][slot] = 0;
+	gVehicle[vehicleid][v_Component][slot] = 0;
 	return RemoveVehicleComponent(vehicleid, componentid);
 }
 
 stock Vehicle_RemoveComponentInSlot(vehicleid, slot)
 {
-	gVehicle[vehicleid][Component][slot] = 0;
+	gVehicle[vehicleid][v_Component][slot] = 0;
 	new componentid = GetVehicleComponentInSlot(vehicleid, slot);
 	return RemoveVehicleComponent(vehicleid, componentid);
 }
@@ -648,16 +648,16 @@ stock Vehicle_SetDoorStatus(vehicleid, bool:isLock)
 	Vehicle_GetParams(vehicleid, engine, lights, alarm, doors, bonnet, boot, objective);
 	Vehicle_SetParams(vehicleid, engine, lights, alarm, _:isLock, bonnet, boot, objective);
 	
-	gVehicle[vehicleid][Doorslocked] = isLock;
+	gVehicle[vehicleid][v_DoorsLocked] = isLock;
 	
 	foreach (new playerid : Player) {
-		SetVehicleParamsForPlayer(vehicleid, playerid, gVehicle[vehicleid][Objective], _:isLock);
+		SetVehicleParamsForPlayer(vehicleid, playerid, gVehicle[vehicleid][v_Objective], _:isLock);
 	}
 }
 
 stock bool:Vehicle_GetDoorStatus(vehicleid)
 {
-	return gVehicle[vehicleid][Doorslocked];
+	return gVehicle[vehicleid][v_DoorsLocked];
 }
 
 /*
@@ -670,14 +670,14 @@ stock Vehicle_SetObjectiveStatus(vehicleid, bool:isEnabled)
 	Vehicle_GetParams(vehicleid, engine, lights, alarm, doors, bonnet, boot, objective);
 	Vehicle_SetParams(vehicleid, engine, lights, alarm, doors, bonnet, boot, _:isEnabled);
 	
-	gVehicle[vehicleid][Objective] = isEnabled;
+	gVehicle[vehicleid][v_Objective] = isEnabled;
 	
 	foreach (new playerid : Player) {
-		SetVehicleParamsForPlayer(vehicleid, playerid, _:isEnabled, gVehicle[vehicleid][Doorslocked]);
+		SetVehicleParamsForPlayer(vehicleid, playerid, _:isEnabled, gVehicle[vehicleid][v_DoorsLocked]);
 	}
 }
 
 stock bool:Vehicle_GetObjectiveStatus(vehicleid)
 {
-	return gVehicle[vehicleid][Objective];
+	return gVehicle[vehicleid][v_Objective];
 }

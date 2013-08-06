@@ -63,7 +63,7 @@ stock Game_LoadConfig(file_cfg)
 	ini_getInteger(file_cfg, "game_ManualVehicleEngineAndLights", gGameConf[c_ManualVehicleEngineAndLights]);
 	ini_getInteger(file_cfg, "game_ShowPlayerMarkers", gGameConf[c_ShowPlayerMarkers]);
 	ini_getInteger(file_cfg, "game_ShowPlayerMarkersMode", gGameConf[c_ShowPlayerMarkersMode]);
-	ini_getInteger(file_cfg, "game_LimitPlayerMarkerRadius", gGameConf[c_LimitPlayerMarkerRadius]);
+	ini_getFloat(file_cfg, "game_LimitPlayerMarkerRadius", gGameConf[c_LimitPlayerMarkerRadius]);
 }
 
 stock Game_SaveConfig(file_cfg)
@@ -74,5 +74,5 @@ stock Game_SaveConfig(file_cfg)
 	ini_setInteger(file_cfg, "game_ManualVehicleEngineAndLights", gGameConf[c_ManualVehicleEngineAndLights]);
 	ini_setInteger(file_cfg, "game_ShowPlayerMarkers", gGameConf[c_ShowPlayerMarkers]);
 	ini_setInteger(file_cfg, "game_ShowPlayerMarkersMode", gGameConf[c_ShowPlayerMarkersMode]);
-	ini_setInteger(file_cfg, "game_LimitPlayerMarkerRadius", gGameConf[c_LimitPlayerMarkerRadius]);
+	ini_setFloat(file_cfg, "game_LimitPlayerMarkerRadius", gGameConf[c_LimitPlayerMarkerRadius]);
 }

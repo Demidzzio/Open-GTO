@@ -33,17 +33,7 @@ stock Kernel_LoadConfig(file_cfg)
 	Log_LoadConfig(file_cfg);
 	Lang_LoadConfig(file_cfg);
 	Weather_LoadConfig(file_cfg);
-	// protection
-	Money_LoadConfig(file_cfg);
-	Armour_LoadConfig(file_cfg);
-	Health_LoadConfig(file_cfg);
-	Rconlogin_LoadConfig(file_cfg);
-	Jetpack_LoadConfig(file_cfg);
-	Chat_LoadConfig(file_cfg);
-	Idle_LoadConfig(file_cfg);
-	Weapon_LoadConfig(file_cfg);
-	Speed_LoadConfig(file_cfg);
-	return 1;
+	Protect_LoadConfig(file_cfg);
 }
 
 stock Kernel_SaveConfig(file_cfg)
@@ -52,15 +42,5 @@ stock Kernel_SaveConfig(file_cfg)
 	Log_SaveConfig(file_cfg);
 	Lang_SaveConfig(file_cfg);
 	Weather_SaveConfig(file_cfg);
-	// protection
-	Money_SaveConfig(file_cfg);
-	Armour_SaveConfig(file_cfg);
-	Health_SaveConfig(file_cfg);
-	Rconlogin_SaveConfig(file_cfg);
-	Jetpack_SaveConfig(file_cfg);
-	Chat_SaveConfig(file_cfg);
-	Idle_SaveConfig(file_cfg);
-	Weapon_SaveConfig(file_cfg);
-	Speed_SaveConfig(file_cfg);
-	return 1;
+	Protect_SaveConfig(file_cfg);
 }

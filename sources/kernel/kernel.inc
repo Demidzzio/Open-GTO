@@ -16,7 +16,6 @@
 stock Kernel_OnGameModeInit()
 {
 	Lang_OnGameModeInit();
-	Log_OnGameModeInit();
 	Weather_OnGameModeInit();
 	Game_OnGameModeInit();
 	return 1;

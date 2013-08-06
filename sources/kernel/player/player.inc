@@ -13,20 +13,22 @@
 #pragma library kplayer
 
 
-enum info_Player {
-	Float:Armour,
-	Float:Health,
-	Name[MAX_PLAYER_NAME + 1],
-	Ip[MAX_IP],
-	Money,
-	BankMoney,
-	WeaponID[MAX_WEAPON_SLOT],
-	WeaponAmmo[MAX_WEAPON_SLOT],
-	WeaponSkill[11],
-	Float:OldPos[3],
-	Score,
+#define Player_IsNPC		IsPlayerNPC
+#define Player_AddClass		AddPlayerClass
+
+enum Info_Player {
+	Float:p_Armour,
+	Float:p_Health,
+	p_Name[MAX_PLAYER_NAME + 1],
+	p_Ip[MAX_IP],
+	p_Money,
+	p_WeaponID[MAX_WEAPON_SLOT],
+	p_WeaponAmmo[MAX_WEAPON_SLOT],
+	p_WeaponSkill[11],
+	Float:p_OldPos[3],
+	p_Score,
 }
-new gPlayer[MAX_PLAYERS][info_Player];
+new gPlayer[MAX_PLAYERS][Info_Player];
 
 /*
 
@@ -55,17 +57,17 @@ stock Float:Player_GetSpeed(playerid)
 
 stock Player_GetOldPos(playerid, &Float:x, &Float:y, &Float:z)
 {
-	x = gPlayer[playerid][OldPos][0];
-	y = gPlayer[playerid][OldPos][1];
-	z = gPlayer[playerid][OldPos][2];
+	x = gPlayer[playerid][p_OldPos][0];
+	y = gPlayer[playerid][p_OldPos][1];
+	z = gPlayer[playerid][p_OldPos][2];
 	return 1;
 }
 
 stock Player_SetOldPos(playerid, Float:x, Float:y, Float:z)
 {
-	gPlayer[playerid][OldPos][0] = x;
-	gPlayer[playerid][OldPos][1] = y;
-	gPlayer[playerid][OldPos][2] = z;
+	gPlayer[playerid][p_OldPos][0] = x;
+	gPlayer[playerid][p_OldPos][1] = y;
+	gPlayer[playerid][p_OldPos][2] = z;
 	return 1;
 }
 
@@ -123,19 +125,19 @@ stock Player_GetPing(playerid)
 
 stock Player_GetScore(playerid)
 {
-	return gPlayer[playerid][Score];
+	return gPlayer[playerid][p_Score];
 }
 
 stock Player_SetScore(playerid, score)
 {
-	gPlayer[playerid][Score] = score;
+	gPlayer[playerid][p_Score] = score;
 	SetPlayerScore(playerid, score);
 }
 
 stock Player_GiveScore(playerid, score)
 {
-	gPlayer[playerid][Score] += score;
-	SetPlayerScore(playerid, gPlayer[playerid][Score]);
+	gPlayer[playerid][p_Score] += score;
+	SetPlayerScore(playerid, gPlayer[playerid][p_Score]);
 }
 
 /*

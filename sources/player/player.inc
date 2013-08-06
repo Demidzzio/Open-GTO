@@ -16,7 +16,9 @@
 enum Config_Player {
 	c_PlayerStartMoney,
 }
+
 new gPlayerConf[Config_Player] = {PLAYER_START_MONEY};
+
 
 stock Player_OnGameModeInit()
 {
@@ -35,7 +37,7 @@ stock Player_SaveConfig(file_cfg)
 
 stock Player_Create(playerid)
 {
-	player_SetMoney(playerid, player_start_money);
+	player_SetMoney(playerid, gPlayerConf[c_PlayerStartMoney]);
 	player_Save(playerid);
 	return 1;
 }

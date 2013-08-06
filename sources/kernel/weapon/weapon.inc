@@ -18,8 +18,8 @@
 stock Player_GiveWeapon(playerid, weaponid, ammo)
 {
 	new slot_id = Weapon_GetSlot(weaponid)
-	gPlayer[playerid][WeaponID][slot_id] = weaponid;
-	gPlayer[playerid][WeaponAmmo][slot_id] += ammo;
+	gPlayer[playerid][p_WeaponID][slot_id] = weaponid;
+	gPlayer[playerid][p_WeaponAmmo][slot_id] += ammo;
 	
 	GivePlayerWeapon(playerid, weaponid, ammo);
 	return 1;
@@ -28,8 +28,8 @@ stock Player_GiveWeapon(playerid, weaponid, ammo)
 stock Player_ResetWeapon(playerid)
 {
 	for (new i = 0; i < MAX_WEAPON_SLOT; i++) {
-		gPlayer[playerid][WeaponID][i] = 0;
-		gPlayer[playerid][WeaponAmmo][i] = 0;
+		gPlayer[playerid][p_WeaponID][i] = 0;
+		gPlayer[playerid][p_WeaponAmmo][i] = 0;
 	}
 	
 	ResetPlayerWeapons(playerid);

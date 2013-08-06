@@ -13,21 +13,9 @@
 #pragma library rconlogin
 
 
-new bool:protect_rconlogin_enabled = PROTECT_RCON_LOGIN_ENABLED;
-
-stock Rconlogin_LoadConfig(file_cfg)
-{
-	ini_getInteger(file_cfg, "protect_rconlogin_enabled", protect_rconlogin_enabled);
-}
-
-stock Rconlogin_SaveConfig(file_cfg)
-{
-	ini_setInteger(file_cfg, "protect_rconlogin_enabled", protect_rconlogin_enabled);
-}
-
 stock Rconlogin_OnRconLoginAttempt(ip[], password[], success)
 {
-	if (!protect_rconlogin_enabled || success) {
+	if (!gProtectConf[c_Rconlogin] || success) {
 		return 0;
 	}
 	

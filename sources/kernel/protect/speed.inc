@@ -13,21 +13,9 @@
 #pragma library speed
 
 
-new bool:protect_speed_enabled = PROTECT_SPEED_ENABLED;
-
-stock Speed_LoadConfig(file_cfg)
-{
-	ini_getInteger(file_cfg, "protect_speed_enabled", protect_speed_enabled);
-}
-
-stock Speed_SaveConfig(file_cfg)
-{
-	ini_setInteger(file_cfg, "protect_speed_enabled", protect_speed_enabled);
-}
-
 stock Speed_Check(playerid)
 {
-	if (!protect_speed_enabled) {
+	if (!gProtectConf[c_Speed]) {
 		return 0;
 	}
 	

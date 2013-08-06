@@ -15,13 +15,13 @@
 
 stock Player_SetArmour(playerid, Float:armour)
 {
-	gPlayer[playerid][Armour] = armour;
+	gPlayer[playerid][p_Armour] = armour;
 	SetPlayerArmour(playerid, armour);
 }
 
 stock Float:Player_GetArmour(playerid)
 {
-	return gPlayer[playerid][Armour];
+	return gPlayer[playerid][p_Armour];
 }
 
 stock Player_GiveArmour(playerid, Float:armour)

@@ -24,7 +24,7 @@ stock Player_SetMoney(playerid, money)
 {
 	ResetPlayerMoney(playerid);
 	GivePlayerMoney(playerid, money);
-	gPlayer[playerid][Money] = money;
+	gPlayer[playerid][p_Money] = money;
 	return 1;
 }
 
@@ -46,13 +46,8 @@ stock Player_GiveMoney(playerid, money, showtext = 0)
 	return Player_SetMoney(playerid, Player_GetMoney(playerid) + money);
 }
 
-stock Player_GetTotalMoney(playerid)
-{
-	return gPlayer[playerid][Money] + gPlayer[playerid][BankMoney];
-}
-
 stock Player_GetMoney(playerid)
 {
-	return gPlayer[playerid][Money];
+	return gPlayer[playerid][p_Money];
 }
 

@@ -15,13 +15,13 @@
 
 stock Player_SetHealth(playerid, Float:health)
 {
-	gPlayer[playerid][Health] = health;
+	gPlayer[playerid][p_Health] = health;
 	SetPlayerHealth(playerid, health);
 }
 
 stock Float:Player_GetHealth(playerid)
 {
-	return gPlayer[playerid][Health];
+	return gPlayer[playerid][p_Health];
 }
 
 stock Player_GiveHealth(playerid, Float:health)

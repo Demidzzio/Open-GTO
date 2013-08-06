@@ -28,33 +28,28 @@ new log_dir[][] = {
 };
 
 enum Config_Log {
-	c_GameEnabled,
-	c_UserEnabled,
-	c_ErrorEnabled,
-	c_DebugEnabled,
+	c_GameLog,
+	c_UserLog,
+	c_ErrorLog,
+	c_DebugLog,
 }
 new gLogConf[Config_Log] = {LOG_GAME_ENABLED, LOG_USER_ENABLED, LOG_ERROR_ENABLED, LOG_DEBUG_ENABLED};
 
 
-stock Log_OnGameModeInit()
-{
-	Log_Game(_(LOG_INIT));
-}
-
 stock Log_LoadConfig(file_cfg)
 {
-	ini_getInteger(file_cfg, "log_game_enabled", gLogConf[c_GameEnabled]);
-	ini_getInteger(file_cfg, "log_user_enabled", gLogConf[c_UserEnabled]);
-	ini_getInteger(file_cfg, "log_error_enabled", gLogConf[c_ErrorEnabled]);
-	ini_getInteger(file_cfg, "log_debug_enabled", gLogConf[c_DebugEnabled]);
+	ini_getInteger(file_cfg, "log_game", gLogConf[c_GameLog]);
+	ini_getInteger(file_cfg, "log_user", gLogConf[c_UserLog]);
+	ini_getInteger(file_cfg, "log_error", gLogConf[c_ErrorLog]);
+	ini_getInteger(file_cfg, "log_debug", gLogConf[c_DebugLog]);
 }
 
 stock Log_SaveConfig(file_cfg)
 {
-	ini_setInteger(file_cfg, "log_game_enabled", gLogConf[c_GameEnabled]);
-	ini_setInteger(file_cfg, "log_user_enabled", gLogConf[c_UserEnabled]);
-	ini_setInteger(file_cfg, "log_error_enabled", gLogConf[c_ErrorEnabled]);
-	ini_setInteger(file_cfg, "log_debug_enabled", gLogConf[c_DebugEnabled]);
+	ini_setInteger(file_cfg, "log_game", gLogConf[c_GameLog]);
+	ini_setInteger(file_cfg, "log_user", gLogConf[c_UserLog]);
+	ini_setInteger(file_cfg, "log_error", gLogConf[c_ErrorLog]);
+	ini_setInteger(file_cfg, "log_debug", gLogConf[c_DebugLog]);
 }
 
 stock Log_Write(log, string[])
@@ -89,7 +84,7 @@ stock Log_Write(log, string[])
 
 stock Log_Game(fstring[], {Float, _}:...)
 {
-	if (!gLogConf[c_GameEnabled]) {
+	if (!gLogConf[c_GameLog]) {
 		return 0;
 	}
 	
@@ -141,7 +136,7 @@ stock Log_Game(fstring[], {Float, _}:...)
 
 stock Log_User(fstring[], {Float, _}:...)
 {
-	if (!gLogConf[c_UserEnabled]) {
+	if (!gLogConf[c_UserLog]) {
 		return 0;
 	}
 	
@@ -193,7 +188,7 @@ stock Log_User(fstring[], {Float, _}:...)
 
 stock Log_Error(fstring[], {Float, _}:...)
 {
-	if (!gLogConf[c_ErrorEnabled]) {
+	if (!gLogConf[c_ErrorLog]) {
 		return 0;
 	}
 	
@@ -234,7 +229,7 @@ stock Log_Error(fstring[], {Float, _}:...)
 		printf(message);
 	#endif
 		Log_Write(LOG_Error, message);
-		if (gLogConf[c_GameEnabled]) {
+		if (gLogConf[c_GameLog]) {
 			Log_Write(LOG_Game, message);
 		}
 	} else {
@@ -242,7 +237,7 @@ stock Log_Error(fstring[], {Float, _}:...)
 		printf(fstring);
 	#endif
 		Log_Write(LOG_Error, fstring);
-		if (gLogConf[c_GameEnabled]) {
+		if (gLogConf[c_GameLog]) {
 			Log_Write(LOG_Game, fstring);
 		}
 	}
@@ -251,7 +246,7 @@ stock Log_Error(fstring[], {Float, _}:...)
 
 stock Log_Debug(fstring[], {Float, _}:...)
 {
-	if (!gLogConf[c_DebugEnabled]) {
+	if (!gLogConf[c_DebugLog]) {
 		return 0;
 	}
 	
