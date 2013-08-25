@@ -16,6 +16,15 @@
 #define Player_IsNPC		IsPlayerNPC
 #define Player_AddClass		AddPlayerClass
 
+#define Player_ToggleSpectating		TogglePlayerSpectating
+#define Player_SetCameraPos			SetPlayerCameraPos
+#define Player_SetCameraLookAt		SetPlayerCameraLookAt
+#define Player_SetCameraBehind		SetCameraBehindPlayer
+
+#define Player_SetWeather			SetPlayerWeather
+#define Player_SetTime				SetPlayerTime
+
+
 enum Info_Player {
 	Float:p_Armour,
 	Float:p_Health,
@@ -29,6 +38,44 @@ enum Info_Player {
 	p_Score,
 }
 new gPlayer[MAX_PLAYERS][Info_Player];
+
+
+stock KPlayer_OnConnect(playerid)
+{
+	KPlayer_UpdateCamera(playerid);
+}
+
+stock KPlayer_OnSpawn(playerid)
+{
+	// todo: move to Open-GTO
+	Player_SetPos(playerid, -2762.6882, 10.9242, 6.9015);
+}
+
+stock KPlayer_OnRequestClass(playerid, classid)
+{
+	#pragma unused classid
+	// hide class selection buttons
+	Player_ToggleSpectating(playerid, 1);
+	Player_SetSpawnInfo(playerid, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+	// set camera pos
+	Timer_SetEx("KPlayer_UpdateCamera", 200, 0, "d", playerid);
+	// set weather and time
+	Player_SetWeather(playerid, 43);
+	Player_SetTime(playerid, 0, 0);
+	// show login dialog
+	//
+}
+
+forward KPlayer_UpdateCamera(playerid);
+public KPlayer_UpdateCamera(playerid)
+{
+	// todo: move to Open-GTO
+	Player_SetCameraPos(playerid, -2785.616943, 26.270446, 17.054141);
+	Player_SetCameraLookAt(playerid, -2775.761230, 15.552896, 12.677975);
+}
+
+
+
 
 /*
 

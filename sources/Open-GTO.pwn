@@ -132,6 +132,7 @@ public OnPlayerConnect(playerid)
     if (Player_IsNPC(playerid)) {
 		return 1;
 	}
+	Kernel_OnPlayerConnect(playerid);
 	return 1;
 }
 
@@ -140,6 +141,7 @@ public OnPlayerDisconnect(playerid, reason)
 	if (Player_IsNPC(playerid)) {
 		return 1;
 	}
+	Kernel_OnPlayerDisconnect(playerid, reason);
 	return 1;
 }
 
@@ -181,16 +183,19 @@ public OnPlayerSpawn(playerid)
 	if (Player_IsNPC(playerid)) {
 		return 1;
 	}
+	Kernel_OnPlayerSpawn(playerid);
 	return 1;
 }
 
 public OnPlayerRequestClass(playerid, classid)
 {
+	Kernel_OnRequestClass(playerid, classid);
 	return 1;
 }
 
 public OnPlayerRequestSpawn(playerid)
 {
+	Kernel_OnPlayerRequestSpawn(playerid);
 	return 1;
 }
 

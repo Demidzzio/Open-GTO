@@ -20,3 +20,28 @@ stock Kernel_OnGameModeInit()
 	Game_OnGameModeInit();
 	return 1;
 }
+
+stock Kernel_OnPlayerConnect(playerid)
+{
+	KPlayer_OnConnect(playerid);
+}
+
+stock Kernel_OnPlayerDisconnect(playerid, reason)
+{
+	
+}
+
+stock Kernel_OnPlayerSpawn(playerid)
+{
+	KPlayer_OnSpawn(playerid);
+}
+
+stock Kernel_OnRequestClass(playerid, classid)
+{
+	KPlayer_OnRequestClass(playerid, classid);
+}
+
+stock Kernel_OnPlayerRequestSpawn(playerid)
+{
+	
+}
