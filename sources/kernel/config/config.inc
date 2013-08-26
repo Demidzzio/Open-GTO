@@ -34,6 +34,7 @@ stock Kernel_LoadConfig(file_cfg)
 	Lang_LoadConfig(file_cfg);
 	Weather_LoadConfig(file_cfg);
 	Protect_LoadConfig(file_cfg);
+	Camera_LoadConfig(file_cfg);
 }
 
 stock Kernel_SaveConfig(file_cfg)
@@ -43,4 +44,5 @@ stock Kernel_SaveConfig(file_cfg)
 	Lang_SaveConfig(file_cfg);
 	Weather_SaveConfig(file_cfg);
 	Protect_SaveConfig(file_cfg);
+	Camera_SaveConfig(file_cfg);
 }

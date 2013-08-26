@@ -69,9 +69,7 @@ stock KPlayer_OnRequestClass(playerid, classid)
 forward KPlayer_UpdateCamera(playerid);
 public KPlayer_UpdateCamera(playerid)
 {
-	// todo: move to Open-GTO
-	Player_SetCameraPos(playerid, -2785.616943, 26.270446, 17.054141);
-	Player_SetCameraLookAt(playerid, -2775.761230, 15.552896, 12.677975);
+	Player_SetDefaultCameraPos(playerid);
 }
 
 

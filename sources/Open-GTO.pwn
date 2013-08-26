@@ -10,6 +10,7 @@
 #include "sources/config/config.h"
 
 #include "sources/kernel/config/config.inc"
+#include "sources/kernel/config/camera.inc"
 #include "sources/kernel/lib/utils.inc"
 #include "sources/kernel/lang/lang.inc"
 #include "sources/kernel/log/log.inc"
@@ -43,6 +44,7 @@
 #include "sources/kernel/player/vehicle.inc"
 #include "sources/kernel/player/vip.inc"
 #include "sources/kernel/player/weapon.inc"
+#include "sources/kernel/player/camera.inc"
 
 #include "sources/kernel/vehicle/vehicle.inc"
 #include "sources/kernel/vehicle/fuel.inc"
