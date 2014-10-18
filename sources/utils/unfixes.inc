@@ -1,6 +1,6 @@
 /*
 
-	About: disable fixes functions
+	About: Отключаем фикс функции.
 
 */
 
